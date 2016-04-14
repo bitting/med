@@ -1,0 +1,49 @@
+<ion-side-menus enable-menu-with-back-views="false" ng-init="menu()">
+  <ion-side-menu-content class="post-size-14px">
+    <ion-nav-bar class="bar-dark app-top-bar">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+      <ion-nav-buttons side="right">
+        <img class="logo-image" ng-src="img\{{avatar}}\personajeMenu.png" spinner-on-load  menu-toggle="right">
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-content class="custom">
+      <ion-list>
+        <!--<ion-item class="heading-item item" nav-clear menu-close ui-sref="app.settings">-->
+      <div class="avatar">
+        <img class="user-image" ng-src="img\{{avatar}}\personajeMenu.png" ng-click="login()" spinner-on-load>
+        <!--<img class="user-image" ng-src="{{user.avatar}}" spinner-on-load>-->
+      </div>
+      <div class="heading-bg">
+      </div>
+      <ion-list>
+        <ion-item menu-close href="#/home/inicio">
+          Inicio
+        </ion-item>
+        <ion-item menu-close href="#/home/medicinas">
+          Mis medicinas
+        </ion-item>
+        <ion-item menu-close href="#/home/tomas">
+            Pastillero
+        </ion-item>
+        <ion-item menu-close href="#/home/seguimiento">
+            Seguimiento
+        </ion-item>
+        <ion-item menu-close href="#/home/telecumple">
+            Telecumple
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
+

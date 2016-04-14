@@ -1,0 +1,13 @@
+<ion-view title="Seleccionar medicamento" ng-init="initMedicamentos()">
+    <ion-content>
+        <div class="card" ng-repeat="medicamento in medicamentos" ui-sref="home.addUser({ medId: medicamento.ID })">
+                <!--<img class="full-image" src="img/categorias/{{ categoria.Image }}">-->
+            <div class="item item-divider">
+                {{ medicamento.Nombre }}
+            </div>
+            <div class="item item-text-wrap">
+                {{ medicamento.Dosis }} {{ medicamento.Unidades }}
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

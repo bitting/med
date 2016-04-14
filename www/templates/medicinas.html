@@ -1,0 +1,19 @@
+<ion-view view-title="Medicinas" ng-init="initUsers()">
+    <ion-content>
+        <div>{{ prueba }}</div>
+        <div class="card">
+            <button class="button button-calm button-block" ui-sref="home.categorias">
+              Nueva medicina
+            </button>
+            <ion-list>
+                <ion-item class="item-remove-animate item-icon-right" ng-repeat="user in users" ui-sref="home.medicamento({ userId: user.id })">
+                    <h2>{{user.name}}</h2>
+                    <i class="icon ion-chevron-right icon accesory"></i>
+                    <ion-option-button class="button-assertive" ng-click="remove(user.id)">
+                        Delete
+                    </ion-option-button>
+                </ion-item>
+           </ion-list>
+        </div>
+    </ion-content>
+</ion-view>

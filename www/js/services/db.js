@@ -1,4 +1,4 @@
-angular.module("med.services", [])
+var serv = angular.module("med.services", ['ngCordova'])
 
 .factory('DBA', function($cordovaSQLite, $q, $ionicPlatform) {
   var self = this;
@@ -149,15 +149,15 @@ angular.module("med.services", [])
 
 /*
   Fecha hoy con 00:00:00
-  Buscar fecha entre fecha de hoy y fecha +1
-  self.getByDay = function(date) {
-    var parameters = [date];
-    return DBA.query("SELECT id, med_id, med_name, date FROM tomas WHERE date = (?)", parameters)
+  Buscar fecha entre fecha de hoy y fecha +1*/
+  self.getByDay = function(dateIni, dateEnd) {
+    var parameters = [dateIni, dateEnd];
+    console.log(parameters);
+    return DBA.query("SELECT id, med_id, med_name, date FROM tomas WHERE date >= (?) and date <= (?)", parameters)
     .then(function(result) {
       return DBA.getAll(result);
     });
   }
-*/
 
   self.get = function(tomaId) {
     var parameters = [tomaId];
@@ -185,3 +185,13 @@ angular.module("med.services", [])
 
   return self;
 })
+.factory('Notify', function($cordovaLocalNotification) {
+    this.getNotifications = function() {
+        cordova.plugins.notification.local.getScheduled(function (notifications) {
+            var result = JSON.stringify(notifications);
+        });
+        return result;
+    }
+
+    return this;
+});

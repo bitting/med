@@ -1,0 +1,14 @@
+<ion-view title="Seleccionar categoria" ng-init="initCategorias()">
+    <ion-content class="background">
+        <div class="card" ng-repeat="categoria in categorias" ui-sref="home.medicamentos({ catId: categoria.Nombre })">
+            <div class="item item-divider">
+                {{ categoria.Nombre }}
+            </div>
+            <div class="item item-text-wrap">
+                <div class="avatar">
+                    <img class="medicamentos" ng-src="{{ categoria.Image }}" spinner-on-load/>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

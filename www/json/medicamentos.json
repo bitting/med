@@ -1,0 +1,875 @@
+[
+  {
+    "ID": 1,
+    "Nombre": "Asacol",
+    "Dosis": "800mg",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "comprimidos",
+    "CN": 701401
+  },
+  {
+    "ID": 2,
+    "Nombre": "Claversal",
+    "Dosis": "1g",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "espuma rectal",
+    "CN": 675520
+  },
+  {
+    "ID": 3,
+    "Nombre": "Claversal",
+    "Dosis": "500mg",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "supositorios",
+    "CN": 687484
+  },
+  {
+    "ID": 4,
+    "Nombre": "Claversal",
+    "Dosis": "500mg",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "comprimidos",
+    "CN": 984088
+  },
+  {
+    "ID": 5,
+    "Nombre": "Lixacol",
+    "Dosis": "400mg",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "comprimidos",
+    "CN": 654768
+  },
+  {
+    "ID": 6,
+    "Nombre": "Mezavant",
+    "Dosis": "1200mg",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "comprimidos",
+    "CN": 661654
+  },
+  {
+    "ID": 7,
+    "Nombre": "Pentasa",
+    "Dosis": "1g",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "suspensión rectal",
+    "CN": 683193
+  },
+  {
+    "ID": 8,
+    "Nombre": "Pentasa",
+    "Dosis": "1g",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "supositorios",
+    "CN": 695395
+  },
+  {
+    "ID": 9,
+    "Nombre": "Pentasa",
+    "Dosis": "500mg",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "comprimidos",
+    "CN": 695387
+  },
+  {
+    "ID": 10,
+    "Nombre": "Pentasa",
+    "Dosis": "1g",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "comprimidos",
+    "CN": 696127
+  },
+  {
+    "ID": 11,
+    "Nombre": "Pentasa",
+    "Dosis": "1g",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "50 Sobres",
+    "CN": 656600
+  },
+  {
+    "ID": 12,
+    "Nombre": "Pentasa",
+    "Dosis": "1g",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "100 Sobres",
+    "CN": 656601
+  },
+  {
+    "ID": 13,
+    "Nombre": "Pentasa",
+    "Dosis": "2g",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "sobres",
+    "CN": 698431
+  },
+  {
+    "ID": 14,
+    "Nombre": "Salofalk",
+    "Dosis": "1g",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "espuma rectal",
+    "CN": 662398
+  },
+  {
+    "ID": 15,
+    "Nombre": "Salofalk",
+    "Dosis": "1g",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "supositorios",
+    "CN": 677460
+  },
+  {
+    "ID": 16,
+    "Nombre": "Salofalk",
+    "Dosis": "4g",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "suspensión rectal",
+    "CN": 664770
+  },
+  {
+    "ID": 17,
+    "Nombre": "Salofalk",
+    "Dosis": "500mg",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "sobres",
+    "CN": 771568
+  },
+  {
+    "ID": 18,
+    "Nombre": "Salofalk",
+    "Dosis": "1g",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "sobres",
+    "CN": 771618
+  },
+  {
+    "ID": 19,
+    "Nombre": "Salofalk",
+    "Dosis": "1,5g",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "sobres",
+    "CN": 661634
+  },
+  {
+    "ID": 20,
+    "Nombre": "Salofalk",
+    "Dosis": "3g",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Mesalazina",
+    "Unidades": "sobres",
+    "CN": 684706
+  },
+  {
+    "ID": 21,
+    "Nombre": "Salazopyrina",
+    "Dosis": "500mg",
+    "Categoria": "5-asa",
+    "PrincipioActivo": "Sulfasalazina",
+    "Unidades": "comprimidos",
+    "CN": 654427
+  },
+  {
+    "ID": 22,
+    "Nombre": "Clipper",
+    "Dosis": "5mg",
+    "Categoria": "Corticoides 1",
+    "PrincipioActivo": "Beclometasona",
+    "Unidades": "comprimidos",
+    "CN": 651086
+  },
+  {
+    "ID": 23,
+    "Nombre": "Entocord",
+    "Dosis": "3mg",
+    "Categoria": "Corticoides 1",
+    "PrincipioActivo": "Budesonida",
+    "Unidades": "cápsulas",
+    "CN": 667709
+  },
+  {
+    "ID": 24,
+    "Nombre": "Entocord Enema",
+    "Dosis": "2mg",
+    "Categoria": "Corticoides 1",
+    "PrincipioActivo": "Budesonida",
+    "Unidades": "suspensión rectal",
+    "CN": 664227
+  },
+  {
+    "ID": 25,
+    "Nombre": "Intestifalk Uno",
+    "Dosis": "9mg",
+    "Categoria": "Corticoides 1",
+    "PrincipioActivo": "Budesonida",
+    "Unidades": "sobres",
+    "CN": 687844
+  },
+  {
+    "ID": 26,
+    "Nombre": "Intestifalk",
+    "Dosis": "3mg",
+    "Categoria": "Corticoides 1",
+    "PrincipioActivo": "Budesonida",
+    "Unidades": "cápsulas",
+    "CN": 796987
+  },
+  {
+    "ID": 27,
+    "Nombre": "Intestifalk Rectal",
+    "Dosis": "2mg",
+    "Categoria": "Corticoides 1",
+    "PrincipioActivo": "Budesonida",
+    "Unidades": "espuma rectal",
+    "CN": 663598
+  },
+  {
+    "ID": 28,
+    "Nombre": "Proctosteroid",
+    "Dosis": 0,
+    "Categoria": 0,
+    "PrincipioActivo": 0,
+    "Unidades": "aerosol espuma rectal",
+    "CN": 953296
+  },
+  {
+    "ID": 29,
+    "Nombre": "Dezacor",
+    "Dosis": "6mg",
+    "Categoria": "Corticoides 2",
+    "PrincipioActivo": "Deflazacort",
+    "Unidades": "comprimidos",
+    "CN": 980227
+  },
+  {
+    "ID": 30,
+    "Nombre": "Dezacor",
+    "Dosis": "30mg",
+    "Categoria": "Corticoides 2",
+    "PrincipioActivo": "Deflazacort",
+    "Unidades": "comprimidos",
+    "CN": 980219
+  },
+  {
+    "ID": 31,
+    "Nombre": "Zamene",
+    "Dosis": "6mg",
+    "Categoria": "Corticoides 2",
+    "PrincipioActivo": "Deflazacort",
+    "Unidades": "comprimidos",
+    "CN": 994327
+  },
+  {
+    "ID": 32,
+    "Nombre": "Zamene",
+    "Dosis": "30mg",
+    "Categoria": "Corticoides 2",
+    "PrincipioActivo": "Deflazacort",
+    "Unidades": "comprimidos",
+    "CN": 994335
+  },
+  {
+    "ID": 33,
+    "Nombre": "Urbason",
+    "Dosis": "4mg",
+    "Categoria": "Corticoides 2",
+    "PrincipioActivo": "Metilprednisolona",
+    "Unidades": "comprimidos",
+    "CN": 842492
+  },
+  {
+    "ID": 34,
+    "Nombre": "Urbason",
+    "Dosis": "16mg",
+    "Categoria": "Corticoides 2",
+    "PrincipioActivo": "Metilprednisolona",
+    "Unidades": "comprimidos",
+    "CN": 863167
+  },
+  {
+    "ID": 35,
+    "Nombre": "Urbason",
+    "Dosis": "40mg",
+    "Categoria": "Corticoides 2",
+    "PrincipioActivo": "Metilprednisolona",
+    "Unidades": "comprimidos",
+    "CN": 842500
+  },
+  {
+    "ID": 36,
+    "Nombre": "Dacortin",
+    "Dosis": "30mg",
+    "Categoria": "Corticoides 2",
+    "PrincipioActivo": "Prednisona",
+    "Unidades": "comprimidos",
+    "CN": 995233
+  },
+  {
+    "ID": 37,
+    "Nombre": "Prednisona Alonga",
+    "Dosis": "50mg",
+    "Categoria": "Corticoides 2",
+    "PrincipioActivo": "Prednisona",
+    "Unidades": "comprimidos",
+    "CN": 989392
+  },
+  {
+    "ID": 38,
+    "Nombre": "Imurel",
+    "Dosis": "50mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Azatioprina",
+    "Unidades": "comprimidos",
+    "CN": 933176
+  },
+  {
+    "ID": 39,
+    "Nombre": "Mercaptopurina EFG",
+    "Dosis": "50mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Mercaptopurina",
+    "Unidades": "comprimidos",
+    "CN": 0
+  },
+  {
+    "ID": 40,
+    "Nombre": "Bertanel",
+    "Dosis": "7,5mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 673134
+  },
+  {
+    "ID": 41,
+    "Nombre": "Bertanel",
+    "Dosis": "10mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 673135
+  },
+  {
+    "ID": 42,
+    "Nombre": "Bertanel",
+    "Dosis": "15mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 673136
+  },
+  {
+    "ID": 43,
+    "Nombre": "Bertanel",
+    "Dosis": "20mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 673138
+  },
+  {
+    "ID": 44,
+    "Nombre": "Bertanel",
+    "Dosis": "25mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 673139
+  },
+  {
+    "ID": 45,
+    "Nombre": "Metoject",
+    "Dosis": "7,5mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 673208
+  },
+  {
+    "ID": 46,
+    "Nombre": "Metoject",
+    "Dosis": "10mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 673209
+  },
+  {
+    "ID": 47,
+    "Nombre": "Metoject",
+    "Dosis": "12,5mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 686302
+  },
+  {
+    "ID": 48,
+    "Nombre": "Metoject",
+    "Dosis": "15mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 673211
+  },
+  {
+    "ID": 49,
+    "Nombre": "Metoject",
+    "Dosis": "17,5mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 686304
+  },
+  {
+    "ID": 50,
+    "Nombre": "Metoject",
+    "Dosis": "20mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 673212
+  },
+  {
+    "ID": 51,
+    "Nombre": "Metoject",
+    "Dosis": "22,5mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 686305
+  },
+  {
+    "ID": 52,
+    "Nombre": "Metoject",
+    "Dosis": "25mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 673213
+  },
+  {
+    "ID": 53,
+    "Nombre": "Quinux",
+    "Dosis": "7,5mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 703911
+  },
+  {
+    "ID": 54,
+    "Nombre": "Quinux",
+    "Dosis": "10mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 703905
+  },
+  {
+    "ID": 55,
+    "Nombre": "Quinux",
+    "Dosis": "15mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 703907
+  },
+  {
+    "ID": 56,
+    "Nombre": "Quinux",
+    "Dosis": "20mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 703909
+  },
+  {
+    "ID": 57,
+    "Nombre": "Quinux",
+    "Dosis": "25mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "1 jeringa precargada",
+    "CN": 703913
+  },
+  {
+    "ID": 58,
+    "Nombre": "Metotrexato Wyeth",
+    "Dosis": "2,5mg",
+    "Categoria": "Inmunosupresores",
+    "PrincipioActivo": "Metotrexato",
+    "Unidades": "comprimidos",
+    "CN": 654088
+  },
+  {
+    "ID": 59,
+    "Nombre": "Humira",
+    "Dosis": "40mg",
+    "Categoria": "Biológicos",
+    "PrincipioActivo": "Adalimumab",
+    "Unidades": "plumas precargadas",
+    "CN": 658151
+  },
+  {
+    "ID": 60,
+    "Nombre": "Simponi",
+    "Dosis": "50mg",
+    "Categoria": "Biológicos",
+    "PrincipioActivo": "Golimumab",
+    "Unidades": "plumas precargadas",
+    "CN": 664240
+  },
+  {
+    "ID": 61,
+    "Nombre": "Simponi",
+    "Dosis": "100mg",
+    "Categoria": "Biológicos",
+    "PrincipioActivo": "Golimumab",
+    "Unidades": "plumas precargadas",
+    "CN": 699533
+  },
+  {
+    "ID": 62,
+    "Nombre": "Remicade",
+    "Dosis": "100mg",
+    "Categoria": "Biológicos",
+    "PrincipioActivo": "Infliximab",
+    "Unidades": "vial",
+    "CN": 812107
+  },
+  {
+    "ID": 63,
+    "Nombre": "Inflectra",
+    "Dosis": "100mg",
+    "Categoria": "Biológicos",
+    "PrincipioActivo": "Infliximab",
+    "Unidades": "vial",
+    "CN": 701881
+  },
+  {
+    "ID": 64,
+    "Nombre": "Remsina",
+    "Dosis": "100mg",
+    "Categoria": "Biológicos",
+    "PrincipioActivo": "Infliximab",
+    "Unidades": "vial",
+    "CN": 702694
+  },
+  {
+    "ID": 65,
+    "Nombre": "Entyvio",
+    "Dosis": "300mg",
+    "Categoria": "Biológicos",
+    "PrincipioActivo": "Vedolizumab",
+    "Unidades": "vial",
+    "CN": 702821
+  },
+  {
+    "ID": 66,
+    "Nombre": "Flagyl",
+    "Dosis": "250mg",
+    "Categoria": "Antibióticos",
+    "PrincipioActivo": "Metronidazol",
+    "Unidades": "comprimidos",
+    "CN": 699566
+  },
+  {
+    "ID": 67,
+    "Nombre": "Metronidazol Normon",
+    "Dosis": "250mg",
+    "Categoria": "Antibióticos",
+    "PrincipioActivo": "Metronidazol",
+    "Unidades": "comprimidos",
+    "CN": 693738
+  },
+  {
+    "ID": 68,
+    "Nombre": "Araxacina",
+    "Dosis": "500mg",
+    "Categoria": "Antibióticos",
+    "PrincipioActivo": "Ciprofloxacino",
+    "Unidades": "comprimidos",
+    "CN": 697954
+  },
+  {
+    "ID": 69,
+    "Nombre": "Baycip",
+    "Dosis": "500mg",
+    "Categoria": "Antibióticos",
+    "PrincipioActivo": "Ciprofloxacino",
+    "Unidades": "comprimidos",
+    "CN": 697909
+  },
+  {
+    "ID": 70,
+    "Nombre": "Ferbisol",
+    "Dosis": "100mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "cápsulas",
+    "CN": 651473
+  },
+  {
+    "ID": 71,
+    "Nombre": "Ferro sanol",
+    "Dosis": "100mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "cápsulas",
+    "CN": 870261
+  },
+  {
+    "ID": 72,
+    "Nombre": "Cromatonbic Ferro",
+    "Dosis": "37,5mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "viales bebibles 12ml",
+    "CN": 656821
+  },
+  {
+    "ID": 73,
+    "Nombre": "Fero-gradumet",
+    "Dosis": "105mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "comprimidos",
+    "CN": 656582
+  },
+  {
+    "ID": 74,
+    "Nombre": "Losferron",
+    "Dosis": "80mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "comprimidos efervescentes",
+    "CN": 873448
+  },
+  {
+    "ID": 75,
+    "Nombre": "Tardyferon",
+    "Dosis": "80mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "comprimidos",
+    "CN": 672908
+  },
+  {
+    "ID": 76,
+    "Nombre": "Ferplex 40",
+    "Dosis": "800mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "viales bebibles 15ml",
+    "CN": 776773
+  },
+  {
+    "ID": 77,
+    "Nombre": "Ferrocur",
+    "Dosis": "800mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "viales bebibles 15ml",
+    "CN": 778019
+  },
+  {
+    "ID": 78,
+    "Nombre": "Ferroprotina",
+    "Dosis": "40mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "comprimidos solubles",
+    "CN": 680155
+  },
+  {
+    "ID": 79,
+    "Nombre": "Ferroprotina",
+    "Dosis": "40mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "sobres granulado",
+    "CN": 656823
+  },
+  {
+    "ID": 80,
+    "Nombre": "Ferroprotina",
+    "Dosis": "80mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "sobres granulado",
+    "CN": 663122
+  },
+  {
+    "ID": 81,
+    "Nombre": "Kilor",
+    "Dosis": "40mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "comprimidos solubles",
+    "CN": 680155
+  },
+  {
+    "ID": 82,
+    "Nombre": "Kilor",
+    "Dosis": "40mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "sobres granulado",
+    "CN": 656822
+  },
+  {
+    "ID": 83,
+    "Nombre": "Kilor",
+    "Dosis": "80mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "sobres granulado",
+    "CN": 661856
+  },
+  {
+    "ID": 84,
+    "Nombre": "Lactoferrina",
+    "Dosis": "800mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "viales bebibles 15ml",
+    "CN": 777896
+  },
+  {
+    "ID": 85,
+    "Nombre": "Profer",
+    "Dosis": "40mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "comprimidos solubles",
+    "CN": 672587
+  },
+  {
+    "ID": 86,
+    "Nombre": "Profer",
+    "Dosis": "40mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "sobres granulado",
+    "CN": 656798
+  },
+  {
+    "ID": 87,
+    "Nombre": "Profer",
+    "Dosis": "80mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "sobres granulado",
+    "CN": 661499
+  },
+  {
+    "ID": 88,
+    "Nombre": "Podertonic adultos",
+    "Dosis": "1000mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "sobres",
+    "CN": 761916
+  },
+  {
+    "ID": 89,
+    "Nombre": "Syron",
+    "Dosis": "40mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "comprimidos solubles",
+    "CN": 679947
+  },
+  {
+    "ID": 90,
+    "Nombre": "Syron",
+    "Dosis": "80mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "sobres granulado",
+    "CN": 672674
+  },
+  {
+    "ID": 91,
+    "Nombre": "Fisiogen ferro",
+    "Dosis": 30,
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "cápsulas",
+    "CN": 164330
+  },
+  {
+    "ID": 92,
+    "Nombre": "Fisiogen ferro forte",
+    "Dosis": 30,
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "cápsulas",
+    "CN": 164328
+  },
+  {
+    "ID": 93,
+    "Nombre": "Fisiogen ferro forte",
+    "Dosis": 30,
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "sobres",
+    "CN": 174511
+  },
+  {
+    "ID": 94,
+    "Nombre": "Acfol",
+    "Dosis": "5mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "comprimidos",
+    "CN": 939579
+  },
+  {
+    "ID": 95,
+    "Nombre": "Ácido Fólico Aspol",
+    "Dosis": "10mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "cápsulas",
+    "CN": 700505
+  },
+  {
+    "ID": 96,
+    "Nombre": "Bialfoli",
+    "Dosis": "5mg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "comprimidos",
+    "CN": 689323
+  },
+  {
+    "ID": 97,
+    "Nombre": "Zolico",
+    "Dosis": "400mcg",
+    "Categoria": "Suplementos",
+    "PrincipioActivo": 0,
+    "Unidades": "comprimidos",
+    "CN": 756841
+  }
+]

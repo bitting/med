@@ -1,71 +1,111 @@
 
 
 <div class="list">
-   <label class="item item-input">
+   <div class="item item-input">
+    <label>
+      <span class="input-label">Instrucciones de toma</span>
+    </label>
+    <input type="text" name="instructions" ng-model="$parent.user.instructions"/>
+  </div>
+
+
+  <div class="item item-input">
+    <label>
       <span class="input-label">Nombre</span>
-      <input type="text" name="name" ng-model="$parent.user.name" placeholder="Name" required>
-  </label>
-  <div class="error-container last-error-container" ng-show="formMed.name.$error && formMed.$submitted" ng-messages="formMed.name.$error">
-        <div ng-message="required">Indica el medicamento</div>
-  </div>
-
-  <label class="item item-input">
-      <span class="input-label">Días</span>
-      <input type="text" name="days" ng-readonly="true" ng-model="$parent.user.days" ng-click="openDaysForm($parent.user)" required>
-      <button class="button icon-left ion-chevron-right button-clear button-dark" ng-click="openDaysForm($parent.user)"> </button>
-      <input type="hidden" ng-model="$parent.user.dayscodes">
-  </label>
-  <div class="error-container last-error-container" ng-show="formMed.days.$error && formMed.$submitted" ng-messages="formMed.days.$error">
-        <div ng-message="required">Indica los días de las tomas</div>
+    </label>
+    <input type="text" name="name" ng-model="$parent.user.name" placeholder="Name" required />
   </div>
 
 
-  <label class="item item-input">
-      <span class="input-label">Horas</span>
-      <input type="text" name="hours" ng-readonly="true" ng-model="$parent.user.hours" ng-click="openHoursForm($parent.user.hours)" required>
-      <button class="button icon-left ion-chevron-right button-clear button-dark" ng-click="openHoursForm($parent.user.hours)"> </button>
-  </label>
-  <div class="error-container last-error-container" ng-show="formMed.hours.$error && formMed.$submitted" ng-messages="formMed.hours.$error">
-        <div ng-message="required">Indica las horas de las tomas </div>
-  </div>
-
-
-  <label class="item item-input">
-    <span class="input-label">Fecha inicio</span>
-    <input type="date" id="date_ini" name="date_ini" ng-model="$parent.user.date_ini" required> </input>
-  </label>
   <div class="error-container last-error-container" ng-show="formMed.date_ini.$error && formMed.$submitted" ng-messages="formMed.date_ini.$error">
-        <div ng-message="required">Indica la fecha de inicio de tratamiento</div>
+        <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica la fecha de inicio de tratamiento</div>
   </div>
+  <div class="item item-input">
+    <label>
+      <span class="input-label">Fecha inicio</span>
+    </label>
+    <input type="date" id="date_ini" name="date_ini" ng-model="$parent.user.date_ini" ng-readonly="$parent.edit" required class="calendar"  />
+    <i class="icon-left ion-calendar mediano"> </i>
+ </div>
 
-
-  <label class="item item-input">
-    <span class="input-label">Fecha fin</span>
-    <input type="date" id="date_end" name="date_end" ng-model="$parent.user.date_end" required> </input>
-  </label>
   <div class="error-container last-error-container" ng-show="formMed.date_end.$error && formMed.$submitted" ng-messages="formMed.date_end.$error">
-        <div ng-message="required">Indica la fecha de finalización de tratamiento</div>
+        <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica la fecha de finalización de tratamiento</div>
+  </div>
+  <div class="item item-input">
+    <label>
+      <span class="input-label">Fecha fin</span>
+    </label>
+    <input type="date" id="date_end" name="date_end" ng-model="$parent.user.date_end" required/>
+    <i class=" icon-left ion-calendar mediano"> </i>
   </div>
 
 
-  <li class="item item-toggle">
-     Alarma
-     <label class="toggle toggle-positive">
-       <input type="checkbox" id="alarma" name="alarma" ng-model="$parent.user.alarm">
-       <div class="track">
-         <div class="handle"></div>
-       </div>
-     </label>
-  </li>
+<!--
+  <div class="error-container last-error-container" ng-show="formMed.days.$error && formMed.$submitted" ng-messages="formMed.days.$error">
+          <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica los días de las tomas</div>
+  </div>
+  <div class="item item-input">
+      <label>
+          <span class="input-label">Días</span>
+      </label>
+      <input type="text" name="days" ng-readonly="true" ng-model="$parent.user.days" ng-click="openDaysForm($parent.user)" required />
+      <i class="icon-left ion-chevron-right ion-ios-timer-outline mediano"> </i>
+      <input type="hidden" ng-model="$parent.user.dayscodes" />
+  </div>
+
+  <div class="error-container last-error-container" ng-show="formMed.hoursString.$error && formMed.$submitted" ng-messages="formMed.hoursString.$error">
+      <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica las horas de las tomas</div>
+  </div>
+  <div class="item item-input">
+      <label>
+        <span class="input-label">Horas</span>
+      </label>
+      <input type="text" name="hoursString" ng-readonly="true" ng-model="$parent.user.hoursString" ng-click="openHoursForm($parent.user.hours)" required />
+      <i class="icon-left ion-ios-time mediano" > </i>
+  </div>
+
+-->
+
+  <div class="error-container last-error-container" ng-show="formMed.units.$error && formMed.$submitted" ng-messages="formMed.units.$error">
+        <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica las unidades</div>
+  </div>
+  <div class="item item-input">
+    <label>
+        <span class="input-label">Unidades</span>
+    </label>
+    <select class="ion-input-select" name="units" ng-options="unit as unit.label for unit in units track by unit.id" ng-model="$parent.user.units" required></select>
+ </div>
 
 
-    <!--
-    <p> test {{$parent.datetest | date:'dd-MM-yyyy'}} </p>
-    -->
+ <div class="error-container last-error-container" ng-show="formMed.frequency.$error && formMed.$submitted" ng-messages="formMed.units.$error">
+       <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica las unidades</div>
+ </div>
+ <div class="item item-input">
+   <label>
+       <span class="input-label">Periodicidad</span>
+   </label>
+  <select class="ion-input-select" name="frequency" ng-options="freq as freq.label for freq in frequency track by freq.id" ng-model="$parent.user.frequency"></select>
+</div>
 
 
-
-
-
+<div class="error-container last-error-container" ng-show="formMed.hour_ini.$invalid && formMed.$submitted" ng-messages="formMed.hour_ini.$error">
+    <div class="error"><img class="cono" ng-src="img\cono.png"> Indica la hora de inicio</div>
+</div>
+<div class="item item-input">
+  <label>
+    <span class="input-label">Hora inicio</span>
   </label>
+  <input type="time" name="hour_ini" ng-model="$parent.user.hour_ini" required />
+</div>
+
+  <div class="item item-toggle">
+     Avisos
+     <label class="toggle toggle-positive">
+          <input type="checkbox" name="alarm" ng-model="$parent.user.alarm" ng-checked = "$parent.user.alarm?true:false">
+
+           <div class="track">
+                <div class="handle"></div>
+            </div>
+    </label>
+  </div>
 </div>

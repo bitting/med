@@ -1,0 +1,37 @@
+[
+    {
+        "ID": 1,
+        "Nombre": "5-asa",
+        "Image": "img/im1.png"
+    },
+    {
+        "ID": 2,
+        "Nombre": "Corticoides 1",
+        "Image": "img/im2.png"
+    },
+    {
+        "ID": 3,
+        "Nombre": "Corticoides 2",
+        "Image": "img/im3.png"
+    },
+    {
+        "ID": 4,
+        "Nombre": "Inmunosupresores",
+        "Image": "img/im4.png"
+    },
+    {
+        "ID": 5,
+        "Nombre": "Biológicos",
+        "Image": "img/im5.png"
+    },
+    {
+        "ID": 6,
+        "Nombre": "Antibióticos",
+        "Image": "img/im6.png"
+    },
+    {
+        "ID": 7,
+        "Nombre": "Suplementos",
+        "Image": "img/im7.png"
+    }
+]

@@ -1,22 +1,20 @@
-<ion-view title="Add user" ng-init="initAddUsers()">
-	<ion-content>
-
-    <form name="formMed" novalidate="" ng-submit="saveMed(formMed, user)" >
-
-    <div ng-include="'forms/userForm.html'"></div>
-
-
-	 <button class="button button-full button-positive" type="submit">
-			Guardar
-		</button>
-
-
-
-    <button class="button button-calm button-block" ng-click="save(user)">
-      Save
-    </button>
-
-	</form>
-
-  </ion-content>
+<ion-view title="Nueva medicina" ng-init="initAddUsers()">
+    <ion-content>
+        <form name="formMed" novalidate="" ng-submit="saveMed(formMed, user)" >
+            <div class="card">
+              <div class="item item-divider">
+                {{ medicamento.Nombre }}
+              </div>
+              <div class="item item-text-wrap">
+                {{ medicamento.Dosis }} {{ medicamento.Unidades }}<br />
+                Principio activo: {{ medicamento.PrincipioActivo }}
+              </div>
+            </div>
+    
+            <div ng-include="'forms/userForm.html'"></div>
+            <button class="button button-full button-positive" type="submit">
+                Guardar
+            </button>
+        </form>
+    </ion-content>
 </ion-view>

@@ -1,4 +1,112 @@
 /* Empty. Add your own CSS if you like */
-.background, .background .pane{
-    background-color: #E7E7E7;
+body{
+  font-family: font-family: 'RobotoDraft';
+}
+.item h2 {
+    margin: 0 0 2px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+.avatar img{
+  margin-right: auto;
+  margin-left: auto;
+}
+.avatar{
+  text-align: center;
+}
+.logo-image{
+  height:30px;
+  width: 30px;
+  float: right;
+}
+.medicamentos{
+  height: 50%;
+  width: 50%;
+}
+.center{
+  text-align: center;
+}
+.background{
+    background-color: #f7f8fa;
+}
+/*custom is class added to ion-content*/
+
+.custom {
+  background-color: #4A4B4D !important; /* This sets the background color*/
+ }
+
+/*Set the background to transparent for ion-item*/
+.custom .item {
+  background-color: transparent;
+  border:none;   /*Removes all borders*/
+  border-top: 1px solid;   /*Top Border for each menu item*/
+  border-bottom:2px solid;   /*Bottom border for each menu item*/
+  border-color: #666;   /*Sets colors for top and bottom border*/
+  color: white;    /*Text color for each item*/
+}
+
+/*Changes the border for the last item*/
+.custom .item:last-child {
+  border-bottom: 1px solid #666;
+}
+
+.custom .item-complex .item-content, .dark .item-radio .item-content {
+  background-color: transparent;
+}
+
+/*Just makes the type white*/
+.custom h2,
+.custom h3,
+.custom p,
+.custom a {
+  color: white;  /*Text color for each item, overrides the color property above*/
+}
+.itemselect {
+  margin: 20px;
+}
+
+.error-container{
+  position: relative;
+  padding-bottom: 0px;
+  margin-bottom: -5px;
+  z-index: 1000;
+}
+.error{
+  background-color: #FF7D7D;
+  color: #FFFFFF;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  border-radius: 5px 5px 5px 5px;
+}
+.cono{
+  left: 5px;
+  position: relative;
+  top:20px;
+}
+#date_ini{
+  background-color: #F8F8F8;
+}
+#date_end{
+  background-color: #F8F8F8;
+}
+
+.button-clear.button-clear {
+    color: #666666;
+}
+.tituloMedicamento{
+  padding: 5px;
+}
+.bar .title{
+  text-align: left;
+}
+
+.input-label{
+  min-width: 120px;
+}
+.mediano{
+  font-size: 25px;
+  width: 30px;
 }

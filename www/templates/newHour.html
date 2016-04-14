@@ -1,0 +1,33 @@
+<ion-modal-view ng-init="initNewHour()">
+    <ion-content>
+
+        <ion-header-bar align-title="left" class="bar-positive">
+            <div class="buttons">
+                <button class="button button-clear" ng-click="closeNewHourForm()">Cerrar</button>
+            </div>
+        </ion-header-bar>
+        
+        <ion-content>
+            <div class="titulo">Nueva hora de toma </div>
+            <div class="list card" id="newHourCard">
+                <form name="formHour" novalidate="" ng-submit="saveHour(formHour, hours, data)">
+                    <div class="error-container last-error-container" ng-show="novalid" >
+                        <div class="error"><img class="cono" ng-src="img\cono.png"> Indica la hora</div>
+                    </div>
+                    <label class="item item-input">
+                        <span class="input-label">Hora</span>
+                        <input type="time" id="newhour" name="newhour" ng-model="data.newhour" required />
+                    </label>
+
+                    <button class="button button-full button-positive" type="submit">
+                        Guardar
+                    </button>
+                </form>
+
+                <button ng-click="closeNewHourForm()" class="button button-full button-calm button icon-right">
+                    Cancelar
+                </button>
+            </div>
+        </ion-content>
+    </ion-content>
+</ion-modal-view>

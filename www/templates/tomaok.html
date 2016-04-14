@@ -1,0 +1,16 @@
+<ion-view title="Felicidades!" ng-init="initTomaok()">
+    <ion-content class="background">
+        <div class="list card">
+            <div class="item center">
+                <a ui-sref="home.avatar"><img src="img\personaje1.png" spinner-on-load></a>
+            </div>
+
+            <div class="item item-text center">
+                <h2>{{ indice }}:{{ mensajealeatorio }}</h2>
+            </div>
+            <button class="button button-full button-positive" ng-click="goInicio()">
+                ¡Gracias!
+            </button>
+        </div>
+    </ion-content>
+</ion-view>
