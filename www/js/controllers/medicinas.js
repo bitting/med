@@ -1,12 +1,12 @@
 app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Categorias, Medicamentos, $state, $stateParams, $window, $ionicPopup, $ionicModal, $http, $filter, $ionicHistory) {
-    
+
     /* MODAL DíaAS*/
     $ionicModal.fromTemplateUrl('templates/days.html',{
         scope:$scope
     }).then(function(modal){
         $scope.modalDays = modal;
     });
-    
+
     $scope.openDaysForm = function(user){
         $scope.user = user;
         if (angular.isDefined( $scope.user ) && angular.isDefined( $scope.user.days )) {
@@ -23,11 +23,11 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
         }
         $scope.modalDays.show();
     }
-    
+
     $scope.closeDaysForm = function(){
         $scope.modalDays.hide();
     }
-    
+
     /* MODAL LISTA HORAS*/
     $ionicModal.fromTemplateUrl('templates/hours.html',{
         scope:$scope
@@ -38,18 +38,18 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
     $scope.openHoursForm = function(hours){
         console.log('open hours -> ' + hours);
         $scope.modalHours.show();
-        
+
         if (hours == null) hours = [];
-        
+
         $scope.user.hours = hours;
         $scope.user.hoursString = hours.join(", ");
-        
+
         $scope.setHours = function(hours) {
             $scope.user.hours = hours;
             $scope.user.hoursString = hours.join(", ");
             $scope.modalHours.hide();
         }
-        
+
         $scope.removeHour = function(hour) {
             var index = $scope.user.hours.indexOf(hour);
             $scope.user.hours.splice(index, 1);
@@ -61,30 +61,30 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
         $scope.user.hoursString = hours.join(', ');
         $scope.modalHours.hide();
     }
-    
+
     /*****/
-    
+
     /*** MODAL NUEVA HORA ***/
-    
+
     $ionicModal.fromTemplateUrl('templates/newHour.html', {
         scope:$scope
     }).then(function(modal) {
         $scope.modalNewHour = modal;
     });
-    
+
     $scope.openNewHourForm = function(med) {
         $scope.hours = med.hours;
         $scope.modalNewHour.show();
         $scope.novalid = false;
     }
-    
+
     $scope.closeNewHourForm = function() {
         $scope.modalNewHour.hide();
         $scope.valid = false;
     }
-    
+
     /*****/
-    
+
     $scope.initNewHour = function() {
         if (!angular.isDefined($scope.data)) {
             var date = new Date();
@@ -92,11 +92,11 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
             var data =  {
                 newhour: date
             }
-            
+
             $scope.data = data;
         }
     }
-    
+
     $scope.saveHour = function(form, hours, data) {
         if (form.$valid) {
             if (!angular.isDefined(data) || !angular.isDefined(data.newhour)){
@@ -123,18 +123,18 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
 
     $scope.initUsers = function() {
         Users.all().then(function(users){
-            $scope.users = users; 
+            $scope.users = users;
             console.log(users);
         });
     }
-    
+
     $scope.initCategorias = function() {
         Categorias.all().success(function(data) {
             $scope.categorias = data;
             console.log(data);
         });
     }
-    
+
     $scope.initMedicamentos = function() {
         $scope.catId = $stateParams.catId;
         Medicamentos.all().success(function(data) {
@@ -147,16 +147,16 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
             console.log(data);
         });
     }
-    
+
     $scope.initAddUsers = function() {
         $scope.medId = $stateParams.medId;
         Medicamentos.get($scope.medId, function(med) {
             $scope.medicamento = med;
             console.log(med);
-            
+
             var hourIni =  new Date();
             hourIni.setHours(08,00,00,00)
-            
+
             if(!angular.isDefined($scope.user)) {
                 var user = {
                     name : med.Nombre,
@@ -174,7 +174,7 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
             }
         });
     }
-    
+
     $scope.frequency = [{
         id: 1,
         label: '1 al día',
@@ -209,7 +209,7 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
         id: 7,
         label: 'Cada 4 horas',
         value: 4
-    }, 
+    },
     {
         id: 8,
         label: 'Cada 8 horas',
@@ -236,7 +236,7 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
         id: 5,
         label: '1/4',
     }];
-    
+
     $scope.remove = function(userId) {
         $ionicPopup.confirm({
             title: "Eliminar",
@@ -276,17 +276,17 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
             } else {
                 if(!angular.isDefined(user.days)) user.days="";
                 if(!angular.isDefined(user.hours)) user.hours=[];
-                
+
                 var freqHours = user.frequency.value;
                 user.frequency = user.frequency.id;
                 user.units = user.units.id;
-                
+
                 var day = new Date(dateIni.getTime());
                 day.setHours(user.hour_ini.getHours());
                 var dayEnd = dateEnd;
-                
+
                 var now = new Date();
-                
+
                 var dateIniString = $filter('date')(dateIni,"yyyy-MM-dd")+" 00:00:00";
                 var dateEndString  = $filter('date')(dateEnd.getTime(),"yyyy-MM-dd")+" 23:59:59";
                 var hourIniString  = $filter('date')(user.hour_ini,"yyyy-MM-dd HH:mm")+":00";
@@ -300,10 +300,10 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
                             console.log("Prepare notifications");
                             //$scope.prepareNotifications();  /*******/
                         }
-                        
+
                         while (day.getTime() <= dayEnd.getTime()) {
                             var nameDay =  $filter('date')(day,"EEE");
-                            
+
                             var dateTomaString = $filter('date')(day,"yyyy-MM-ddTHH:mm") + ":00";
                             dateToma = new Date(dateTomaString);
 
@@ -348,34 +348,34 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
         var id = $stateParams.userId;
         Users.get(id).then(function(user) {
             console.log("Init edit "+JSON.stringify(user));
-            
+
             user.date_ini = new Date(user.date_ini);
             user.date_end = new Date(user.date_end);
             user.hour_ini = new Date(user.hour_ini);
             $scope.user = user;
-            
+
             var units = ($filter('filter')($scope.units, {id: 4 }));
             user.units = units;
             console.log(JSON.stringify(units));
         });
     }
-    
+
     $scope.update = function(user) {
         var id = $stateParams.userId;
         Users.get(id).then(function(user) {
             console.log("Init edit "+JSON.stringify(user));
-            
+
             user.date_ini = new Date(user.date_ini);
             user.date_end = new Date(user.date_end);
             user.hour_ini = new Date(user.hour_ini);
             $scope.user = user;
-            
+
             var units = ($filter('filter')($scope.units, {id: 4 }));
             user.units = units;
             console.log(JSON.stringify(units));
         });
     }
-    
+
     $scope.initDays = function() {
         $scope.setDays = function(days) {
             var selectedDays = "";
@@ -393,7 +393,7 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
             $scope.closeDaysForm();
         }
     }
-    
+
     $scope.initHours = function() {
         $scope.addHour = function() {
             var hours = [];
@@ -402,7 +402,7 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
             $scope.user.hours = dd;
         }
     }
-    
+
     $scope.initMed = function() {
         var id = $stateParams.userId;
         Users.get(id).then(function(user) {
@@ -414,7 +414,7 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
             $scope.user = user;
         });
     }
-    
+
     $scope.suspendMed = function(user) {
         $ionicPopup.confirm({
             title: "Suspender",
@@ -441,7 +441,7 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
                             console.log(error);
                         }
                     );
-                    
+
                     user.suspend = 1;
                     Users.update(user).then(
                         function(res) {
@@ -493,7 +493,7 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
     $scope.editMed = function(id) {
         $state.go('home.editMedicina',{userId: id});
     }
-    
+
     /**** Test Local Notifications *****/
 
     $scope.getNotifications = function() {
@@ -524,7 +524,7 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
             }]
         })
     }
-    
+
     $scope.prepareNotifications = function() {
         cordova.plugins.notification.local.registerPermission(function (granted) {});
         cordova.plugins.notification.local.on("click", function (notification) {
@@ -533,12 +533,12 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
             $state.go('toma',{tomaId: id});
         });
     }
-    
+
     $scope.createNotification = function(tomaId) {
         Tomas.get(tomaId).then(function(toma) {
             var date = new Date(toma.date);
             var hour = $filter('date')(date,"HH:mm");
-            
+
             if (cordova.plugins.notification.local) {
                 cordova.plugins.notification.local.schedule({
                     id: tomaId,
@@ -556,7 +556,9 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
 /* Filtros */
 .filter('toDia', function($filter) {
     return function(input) {
-        var result = $filter('date')(input,"EEE");
+        var date = new Date(input.replace(' ','T'));
+        date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+        var result = $filter('date')(date,"EEE");
         var res = "";
         if(result=="Mon") result = 'Lunes';
         if(result=="Tue") result = 'Martes';
@@ -592,7 +594,8 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
 
 .filter('toDiaNum', function($filter) {
     return function(input) {
-        var date = new Date(input);
+        var date = new Date(input.replace(' ','T'));
+        date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
         var dia = $filter('date')(date,"EEE");
         var num = $filter('date')(date,"dd");
         var res = "";
@@ -609,7 +612,8 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
 
 .filter('toHour', function($filter) {
     return function(input) {
-        var date = new Date(input);
+        var date = new Date(input.replace(' ','T'));
+        date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
         return $filter('date')(date,"HH:mm");
     };
 })
@@ -635,5 +639,3 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
         return res+" "+ano;
     };
 });
-
-
