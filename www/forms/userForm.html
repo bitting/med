@@ -64,7 +64,7 @@
       <i class="icon-left ion-ios-time mediano" > </i>
   </div>
 
--->
+
 
   <div class="error-container last-error-container" ng-show="formMed.units.$error && formMed.$submitted" ng-messages="formMed.units.$error">
         <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica las unidades</div>
@@ -75,8 +75,18 @@
     </label>
     <select class="ion-input-select" name="units" ng-options="unit as unit.label for unit in units track by unit.id" ng-model="$parent.user.units" required></select>
  </div>
+-->
+ <div class="error-container last-error-container" ng-show="formMed.units.$error && formMed.$submitted" ng-messages="formMed.units.$error">
+       <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica las unidades</div>
+ </div>
+ <div class="item item-input">
+   <label>
+       <span class="input-label">Unidades</span>
+   </label>
+   <input type="text" class="ion-input-select" name="units" ng-model="$parent.user.units.label" ng-click="openUnidadesForm($parent.user)" ng-readonly="true" required />
+</div>
 
-
+<!--
  <div class="error-container last-error-container" ng-show="formMed.frequency.$error && formMed.$submitted" ng-messages="formMed.units.$error">
        <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica las unidades</div>
  </div>
@@ -86,7 +96,17 @@
    </label>
   <select class="ion-input-select" name="frequency" ng-options="freq as freq.label for freq in frequency track by freq.id" ng-model="$parent.user.frequency"></select>
 </div>
+-->
 
+<div class="error-container last-error-container" ng-show="formMed.frequency.$error && formMed.$submitted" ng-messages="formMed.units.$error">
+      <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica la periodicidad</div>
+</div>
+<div class="item item-input">
+  <label>
+      <span class="input-label">Periodicidad</span>
+  </label>
+  <input type="text" class="ion-input-select" name="frequency" ng-model="$parent.user.frequency.label" ng-click="openPeriodicidadForm($parent.user)" ng-readonly="true" required />
+</div>
 
 <div class="error-container last-error-container" ng-show="formMed.hour_ini.$invalid && formMed.$submitted" ng-messages="formMed.hour_ini.$error">
     <div class="error"><img class="cono" ng-src="img\cono.png"> Indica la hora de inicio</div>

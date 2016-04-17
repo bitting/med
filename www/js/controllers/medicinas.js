@@ -28,6 +28,48 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
         $scope.modalDays.hide();
     }
 
+    /* MODAL UNIDADES */
+    $ionicModal.fromTemplateUrl('templates/unidades.html',{
+        scope:$scope
+    }).then(function(modal){
+        $scope.modalUnidades = modal;
+    })
+
+    $scope.openUnidadesForm = function(user){
+        $scope.user = user;
+        $scope.modalUnidades.show();
+    }
+
+    $scope.closeUnidadesForm = function(){
+        $scope.modalUnidades.hide();
+    }
+
+    $scope.setUnits = function(units){
+        $scope.user.units = units;
+        $scope.modalUnidades.hide();
+    }
+
+    /* MODAL PERIODICIDAD */
+    $ionicModal.fromTemplateUrl('templates/periodicidad.html',{
+        scope:$scope
+    }).then(function(modal){
+        $scope.modalPeriodicidad = modal;
+    })
+
+    $scope.openPeriodicidadForm = function(user){
+        $scope.user = user;
+        $scope.modalPeriodicidad.show();
+    }
+
+    $scope.closePeriodicidadForm = function(){
+        $scope.modalPeriodicidad.hide();
+    }
+
+    $scope.setFrequency = function(frequency){
+        $scope.user.frequency = frequency;
+        $scope.modalPeriodicidad.hide();
+    }
+
     /* MODAL LISTA HORAS*/
     $ionicModal.fromTemplateUrl('templates/hours.html',{
         scope:$scope
@@ -290,6 +332,8 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
                 var dateIniString = $filter('date')(dateIni,"yyyy-MM-dd")+" 00:00:00";
                 var dateEndString  = $filter('date')(dateEnd.getTime(),"yyyy-MM-dd")+" 23:59:59";
                 var hourIniString  = $filter('date')(user.hour_ini,"yyyy-MM-dd HH:mm")+":00";
+
+                console.log(JSON.stringify(user));
 
                 Users.add(user, dateIniString, dateIniString, hourIniString).then(
                     function(res) {
