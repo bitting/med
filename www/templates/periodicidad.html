@@ -1,0 +1,19 @@
+<ion-modal-view>
+  <ion-header-bar align-title="left" class="bar-positive">
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closePeriodicidadForm()">Cerrar</button>
+    </div>
+  </ion-header-bar>
+	<ion-content>
+
+       <h3>Periodicidad {{user.name}}</h3>
+
+        <ion-list>
+            <ion-item ng-repeat="frequencyItem in frequency" ng-click="setFrequency(frequencyItem)">
+               {{frequencyItem.label}}
+            </ion-item>
+
+        </ion-list>
+
+  </ion-content>
+</ion-modal-view>

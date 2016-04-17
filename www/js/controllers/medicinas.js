@@ -22,6 +22,7 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
                };
         }
         $scope.modalDays.show();
+        console.log("Open days modal");
     }
 
     $scope.closeDaysForm = function(){

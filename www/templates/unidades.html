@@ -1,0 +1,19 @@
+<ion-modal-view>
+  <ion-header-bar align-title="left" class="bar-positive">
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeUnidadesForm()">Cerrar</button>
+    </div>
+  </ion-header-bar>
+	<ion-content>
+
+       <h3>Unidades {{user.name}}</h3>
+
+        <ion-list>
+            <ion-item ng-repeat="unitItem in units" ng-click="setUnits(unitItem)">
+               {{unitItem.label}}
+            </ion-item>
+
+        </ion-list>
+
+  </ion-content>
+</ion-modal-view>
