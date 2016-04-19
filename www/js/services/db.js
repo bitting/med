@@ -142,7 +142,7 @@ var serv = angular.module("med.services", ['ngCordova'])
   }
 
   self.allGroupDay = function() {
-      return DBA.query("SELECT count(id), sum(tomada), strftime('%Y-%m-%d', date) FROM tomas GROUP BY strftime('%Y-%m-%d', date) ORDER BY date desc")
+      return DBA.query("SELECT count(id) as ids, sum(tomada) as tomadas, strftime('%Y-%m-%d', date) as fecha FROM tomas where date < date('now') GROUP BY strftime('%Y-%m-%d', date) ORDER BY date desc")
       .then(function(result) {
           return DBA.getAll(result);
       });

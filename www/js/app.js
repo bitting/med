@@ -121,7 +121,8 @@ angular.module('med', ['ionic','ngCordova', 'med.controllers', 'med.services', '
         url: "/seguimiento",
         views: {
             'menuContent': {
-                templateUrl: 'templates/seguimiento.html'
+                templateUrl: 'templates/seguimiento.html',
+                controller: 'seguimientoCtrl'
             }
         }
     })

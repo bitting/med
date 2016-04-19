@@ -1,41 +1,8 @@
-app.controller('seguimientoCtrl', function($scope) {
+app.controller('seguimientoCtrl', function($scope, Tomas) {
     $scope.initSeguimiento = function() {
-        Tomas.all().then(function (tomas) {
-            $scope.tomas = tomas;
+        Tomas.allGroupDay().then(function (tomasDays) {
+            $scope.tomasDays = tomasDays;
         });
-    }
-})
-.filter('groupByDayMonth', function($parse, $filter) {
-    return function(tomas) {
-        if (!tomas) return;
-
-        var output = [],
-            previousDate,
-            currentDate;
-
-        var day = {
-            tomas = [],
-            status = true,
-            date = null
-        }
-
-        if (tomas.length > 1) {
-            for (var i = 1; i < tomas.length; i++) {
-                item = tomas[i];
-                itemAnt = tomas[i-1];
-
-                currentDate = new Date(item.date.replace(' ', 'T'));
-                currentDate.setMinutes(currentDate.getMinutes() + currentDate.getTimezoneOffset());
-                previousDate = new Date(item.date.replace(' ', 'T'));
-                previousDate.setMinutes(previousDate.getMinutes() + previousDate.getTimezoneOffset());
-
-                if (i == 1) {
-                    day.tomas.push(item);
-                    day.status = item;
-                    day.date = item;
-                }
-            }
-        }
     }
 })
 .filter('groupByMonthYear', function($parse, $filter) {
@@ -52,9 +19,9 @@ app.controller('seguimientoCtrl', function($scope) {
                 item = tomas[i];
                 itemAnt = tomas[i-1];
 
-                currentDate = new Date (item.date.replace(' ', 'T'));
+                currentDate = new Date (item.fecha.replace(' ', 'T'));
                 currentDate.setMinutes(currentDate.getMinutes() + currentDate.getTimezoneOffset());
-                previousDate = new Date (itemAnt.date.replace(' ', 'T'));
+                previousDate = new Date (itemAnt.fecha.replace(' ', 'T'));
                 previousDate.setMinutes(previousDate.getMinutes() + previousDate.getTimezoneOffset());
 
                 //Si es la primera añade separador de mes
