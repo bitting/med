@@ -139,6 +139,13 @@ var serv = angular.module("med.services", ['ngCordova'])
     });
   }
 
+  self.allGroupDay = function() {
+      return DBA.query("SELECT count(id), sum(tomada), strftime('%Y-%m-%d', date) FROM tomas GROUP BY strftime('%Y-%m-%d', date) ORDER BY date desc");
+      .then(function(result)) {
+          return DBA.getAll(result);
+      }
+  }
+
   self.getByMed = function(medId) {
     var parameters = [medId];
     return DBA.query("SELECT id, med_id, dmed_name, date, tomada FROM tomas WHERE med_id = (?)", parameters)
