@@ -1,100 +1,64 @@
 <ion-view title="Medicamento" ng-init="initMed()">
 	<ion-content>
 
-
- 	 <div class="list">
- 	   <!--<div class="error-container last-error-container" ng-show="formMed.name.$error && formMed.$submitted" ng-messages="formMed.name.$error">
- 	         <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica el medicamento</div>
- 	   </div>
- 	    <label class="item item-input">-->
-
- 	   <div class="tituloMedicamento">
- 	       <div class="item item-divider">
- 	         {{parent.user.name}} Medicamento 1
- 	       </div>
- 	       <div class="item item-text-wrap">
- 	         Descripción del medicamento
- 	       </div>
- 	   </div>
-
-		 <div class="item item-input">
-			 <label>
-					<span class="input-label">Fecha inicio</span>
-			 </label>
-			 <div>{{user.date_ini | date:'dd/MM/yyyy'}}</div>
-		 </div>
-
-		 <div class="item item-input">
-			 <label>
-					<span class="input-label">Fecha fin</span>
-			 </label>
-			 <div>{{user.date_end | date:'dd/MM/yyyy'}}</div>
-		 </div>
-
-
- 	 <!--
- 	   <div class="error-container last-error-container" ng-show="formMed.days.$error && formMed.$submitted" ng-messages="formMed.days.$error">
- 	           <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica los días de las tomas</div>
- 	   </div>
- 	   <div class="item item-input">
- 	       <label>
- 	           <span class="input-label">Días</span>
- 	       </label>
- 	       <input type="text" name="days" ng-readonly="true" ng-model="$parent.user.days" ng-click="openDaysForm($parent.user)" required />
- 	       <i class="icon-left ion-chevron-right ion-ios-timer-outline mediano"> </i>
- 	       <input type="hidden" ng-model="$parent.user.dayscodes" />
- 	   </div>
-
- 	   <div class="error-container last-error-container" ng-show="formMed.hoursString.$error && formMed.$submitted" ng-messages="formMed.hoursString.$error">
- 	       <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica las horas de las tomas</div>
- 	   </div>
- 	   <div class="item item-input">
- 	       <label>
- 	         <span class="input-label">Horas</span>
- 	       </label>
- 	       <input type="text" name="hoursString" ng-readonly="true" ng-model="$parent.user.hoursString" ng-click="openHoursForm($parent.user.hours)" required />
- 	       <i class="icon-left ion-ios-time mediano" > </i>
- 	   </div>
-
- 	 -->
-
-
-
-	 <div class="item item-input">
-		 <label>
-				<span class="input-label">Unidades</span>
-		 </label>
-		 <div>{{user.units.label}}</div>
-	 </div>
-
-	 <div class="item item-input">
-		 <label>
-				<span class="input-label">Periodicidad</span>
-		 </label>
-		 <div>{{user.frequency.label}}</div>
-	 </div>
-
-	  <div class="item item-input">
-	 	  <label>
-				 <span class="input-label">Hora inicio</span>
-		  </label>
-		  <div>{{user.hour_ini | date:'HH:mm'}}</div>
-	  </div>
-
-
-
-		 <div class="item item-input">
-			 <label>
-					 <span class="input-label">Avisos</span>
-			 </label>
-			 <div>{{user.alarm ? 'Si' : 'No'}}</div>
+		<div class="card">
+			<div class="item item-divider">
+				{{user.name}}
+			</div>
+			<div class="item item-text-wrap">
+			  {{user.type_units | capitalize}} - {{user.dosis}} <br />
+				<span >Principio activo: {{user.pactivo }} </span>
+			</div>
 		</div>
 
+ 	 	<div class="list">
+			<div class="item item-input">
 
+			 	<div>{{user.instructions}}</div>
+		  	</div>
 
+		 		<div class="item item-input">
+			 		<label>
+						<span class="input-label">Fecha inicio</span>
+			 		</label>
+			 		<div>{{user.date_ini | date:'dd/MM/yyyy'}}</div>
+		 		</div>
 
+		 		<div class="item item-input">
+			 		<label>
+						<span class="input-label">Fecha fin</span>
+			 		</label>
+			 		<div>{{user.date_end | date:'dd/MM/yyyy'}}</div>
+		 		</div>
+
+	 		<div class="item item-input">
+		 		<label>
+					<span class="input-label">Unidades</span>
+		 		</label>
+		 		<div>{{user.units.label}}</div>
+	 		</div>
+
+	 		<div class="item item-input">
+		 		<label>
+					<span class="input-label">Periodicidad</span>
+		 		</label>
+		 		<div>{{user.frequency.label}}</div>
+	 		</div>
+
+	  	<div class="item item-input">
+	 	  	<label>
+				 	<span class="input-label">Hora inicio</span>
+		  	</label>
+		  	<div>{{user.hour_ini | date:'HH:mm'}}</div>
+	  	</div>
+
+		 	<div class="item item-input">
+			 	<label>
+					<span class="input-label">Avisos</span>
+			 	</label>
+			 	<div>{{user.alarm ? 'Si' : 'No'}}</div>
+			</div>
  	 </div>
-
 
 		<button ng-show="!user.suspend" class="button button-calm button-block" ng-click="editMed(user.id)">
 			Editar

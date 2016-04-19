@@ -45,7 +45,8 @@ var serv = angular.module("med.services", ['ngCordova'])
   var self = this;
 
   self.all = function() {
-    return DBA.query("SELECT id, name, days, date_ini, date_end, alarm FROM med")
+    //return DBA.query("SELECT id, cn, name, dosis, category, pactivo, days, date_ini, date_end, alarm, suspend, units, frequency, hour_ini FROM med")
+    return DBA.query("SELECT id, name, dosis, type_units, suspend FROM med")
     .then(function(result){
       return DBA.getAll(result);
     });
@@ -53,31 +54,32 @@ var serv = angular.module("med.services", ['ngCordova'])
 
   self.get = function(medId) {
     var parameters = [medId];
-
-    return DBA.query("SELECT id, name, days, date_ini, date_end, alarm FROM med WHERE id = (?)", parameters)
-    //return DBA.query("SELECT id, name, days, date_ini, date_end FROM med WHERE id = (?)", parameters)
+    return DBA.query("SELECT id, cn, name, dosis, category, type_units, pactivo, instructions, days, date_ini, date_end, alarm, suspend, units, frequency, hour_ini FROM med WHERE id = (?)", parameters)
     .then(function(result) {
       return DBA.getById(result);
     });
   }
 
-  self.add = function(med) {
-    var parameters = [med.name, med.days, med.date_ini, med.date_end, med.alarm];
-
-    //return DBA.query("INSERT INTO med (name, days, date_ini, date_end) VALUES (?, ?, strftime('$s', ?), strftime('$s', ?))", parameters);
-    return DBA.query("INSERT INTO med (name, days, date_ini, date_end, alarm) VALUES (?, ?, ?, ?, ?)", parameters);
+  self.add = function(med, date_ini, date_end, hour_ini) {
+    var parameters = [med.cn, med.name, med.dosis, med.category, med.type_units, med.pactivo, med.instructions, med.days, date_ini, date_end, med.alarm, med.suspend, med.units.id, med.frequency.id, hour_ini];
+    return DBA.query("INSERT INTO med (cn, name, dosis, category, type_units, pactivo, instructions, days, date_ini, date_end, alarm, suspend, units, frequency, hour_ini) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )", parameters);
   }
-
 
   self.remove = function(medId) {
     var parameters = [medId];
     return DBA.query("DELETE FROM med WHERE id = (?)", parameters);
   }
 
-  self.update = function(editMed) {
-    var parameters = [editMed.name, editMed.days, editMed.date_ini, editMed.date_end, editMed.alarm, editMed.id];
-    return DBA.query("UPDATE med SET name = (?), days = (?), date_ini = (?), date_end = (?), alarm = (?) WHERE id = (?)", parameters);
+  self.updateSuspend = function(editMed) {
+    var parameters = [editMed.suspend, editMed.id];
+    return DBA.query("UPDATE med SET suspend = (?) WHERE id = (?)", parameters);
   }
+  /*
+  self.update = function(editMed) {
+    var parameters = [editMed.name, editMed.days, editMed.date_ini, editMed.date_end, editMed.alarm, editMed.suspend, editMed.units, editMed.frequency, editMed.hour_ini, editMed.id];
+    return DBA.query("UPDATE med SET name = (?), days = (?), date_ini = (?), date_end = (?), alarm = (?), suspend = (?), units = (?), frequency = (?), hour_ini = (?) WHERE id = (?)", parameters);
+  }
+  */
 
   return self;
 })
@@ -147,6 +149,14 @@ var serv = angular.module("med.services", ['ngCordova'])
     });
   }
 
+  self.getByMedFromNow = function(medId) {
+    var parameters = [medId];
+    return DBA.query("SELECT id, med_id, med_name, date, tomada FROM tomas WHERE med_id = (?) AND date > Date('now')", parameters)
+    .then(function(result) {
+      return DBA.getAll(result);
+    });
+  }
+
 /*
   Fecha hoy con 00:00:00
   Buscar fecha entre fecha de hoy y fecha +1*/
@@ -167,9 +177,8 @@ var serv = angular.module("med.services", ['ngCordova'])
     });
   }
 
-  self.add = function(med_id, med_name, date, tomada) {
-    var parameters = [med_id, med_name, date, tomada];
-    console.log("db guarda toma dia "+date);
+  self.add = function(med_id, med_name, date, dateString, tomada) {
+    var parameters = [med_id, med_name, dateString, tomada];
     return DBA.query("INSERT INTO tomas (med_id, med_name, date, tomada) VALUES (?,?,?,?)", parameters);
   }
 
@@ -178,10 +187,21 @@ var serv = angular.module("med.services", ['ngCordova'])
     return DBA.query("DELETE FROM tomas WHERE id = (?)", parameters);
   }
 
+  self.removeByMed = function(medId) {
+    var parameters = [medId];
+    return DBA.query("DELETE FROM tomas WHERE med_id = (?)", parameters);
+  }
+
   self.update = function(editToma) {
     var parameters = [editToma.med_id, editToma.med_name, editToma.date, editToma.tomada, editToma.id];
     return DBA.query("UPDATE tomas SET med_id = (?), med_name = (?), date = (?), tomada = (?) WHERE id = (?)", parameters);
   }
+
+  self.setTomada = function(tomaId, tomada) {
+    var parameters = [tomada, tomaId];
+    return DBA.query("UPDATE tomas SET tomada = (?) WHERE id = (?)", parameters);
+  }
+
 
   return self;
 })
