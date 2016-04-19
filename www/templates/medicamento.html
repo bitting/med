@@ -60,6 +60,7 @@
 			</div>
  	 </div>
 
+<!--
 		<button ng-show="!user.suspend" class="button button-calm button-block" ng-click="editMed(user.id)">
 			Editar
 		</button>
@@ -69,5 +70,28 @@
 		<button class="button button-calm button-block" ng-click="deleteMed(user)">
 			Eliminar
 		</button>
+-->
+
   </ion-content>
+
+	<ion-footer-bar >
+		<div class="row">
+			<div class="col" ng-show="!user.suspend">
+				<button class="button button-calm button-block" ng-click="editMed(user.id)">
+					Editar
+				</button>
+			</div>
+			<div class="col" ng-show="!user.suspend">
+				<button class="button button-calm button-block" ng-click="suspendMed(user)">
+					Suspender
+				</button>
+			</div>
+			<div class="col">
+				<button class="button button-calm button-block" ng-click="deleteMed(user)">
+					Eliminar
+				</button>
+			</div>
+		</div>
+ </ion-footer-bar>
+
 </ion-view>

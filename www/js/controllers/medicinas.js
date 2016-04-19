@@ -1,4 +1,4 @@
-app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Categorias, Medicamentos, $state, $stateParams, $window, $ionicPopup, $ionicModal, $http, $filter, $ionicHistory) {
+app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Categorias, Medicamentos, $state, $stateParams, $window, $ionicPopup, $ionicModal, $http, $filter, $ionicHistory, $ionicLoading) {
 
     /* MODAL DíaAS*/
     $ionicModal.fromTemplateUrl('templates/days.html',{
@@ -168,6 +168,7 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
         Users.all().then(function(users){
             $scope.users = users;
             console.log(users);
+            $ionicLoading.hide();
         });
     }
 
@@ -340,8 +341,18 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
               var dateEndString  = $filter('date')(dateEnd.getTime(),"yyyy-MM-dd")+" 23:59:59";
               var hourIniString  = $filter('date')(user.hour_ini,"yyyy-MM-dd HH:mm")+":00";
 
+              $ionicLoading.show({
+                //templateUrl : '<i class="icon ion-loading-c"> Cargando </i>',
+                templateUrl : '/templates/loading.html',
+                animation: 'fade-in',
+                noBackdrop : false,
+                maxWidth: 80,
+                showDelay: 0
+              });
+
               Users.add(user, dateIniString, dateEndString, hourIniString).then(
                   function(res){
+
                       var medId = res.insertId;
                       if(user.alarm){
                           console.log("Prepare notifications");
@@ -371,11 +382,14 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
                       }
 
                       $state.go("home.medicinas");
+
                   },
                   function(error){
                       console.log(error);
                   }
               );
+
+
           }
 
           console.log("med form valid");
@@ -749,5 +763,27 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
             return inputString.substring(0,1).toUpperCase() + inputString.substring(1);
           }
         };
+    }
+})
+
+.filter('finalizado', function($filter) {
+    return function(input) {
+        var date = new Date(input.replace(' ','T'));
+        var today = new Date();
+        return today > date;
+    };
+})
+
+.filter('estadoMedicamento', function() {
+    return function(user) {
+        var dateEnd = new Date(user.date_end.replace(' ','T'));
+        var today = new Date();
+        var style = 'activo';
+        if (user.suspend) {
+            style = 'suspendido';
+        }else if(today > dateEnd){
+            style = 'finalizado';
+        }
+        return style;
     }
 });

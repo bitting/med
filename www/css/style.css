@@ -32,7 +32,7 @@ body{
 /*custom is class added to ion-content*/
 
 .custom {
-  background-color: #4A4B4D !important; /* This sets the background color*/
+   background-color: #009A9D !important; /* This sets the background color*/
  }
 
 /*Set the background to transparent for ion-item*/
@@ -41,7 +41,7 @@ body{
   border:none;   /*Removes all borders*/
   border-top: 1px solid;   /*Top Border for each menu item*/
   border-bottom:2px solid;   /*Bottom border for each menu item*/
-  border-color: #666;   /*Sets colors for top and bottom border*/
+  border-color:#008184;   /*Sets colors for top and bottom border*/
   color: white;    /*Text color for each item*/
 }
 
@@ -111,6 +111,52 @@ body{
   width: 30px;
 }
 
-.suspend{
-  color: #555555;
+.activo{
+  color: grey;
+}
+.activo h2{
+  color: grey;
+}
+
+.suspendido{
+  color: red;
+}
+
+.suspendido h2{
+  color: red;
+}
+.suspendido{
+  color: red;
+}
+
+.finalizado{
+  color: blue;
+}
+
+.finalizado h2{
+  color: blue;
+}
+
+.tituloMedicamento{
+  padding: 5px;
+}
+.bar .title{
+  text-align: left;
+}
+.colorGeneral{
+  background-color:#AFAA15;
+}
+.colorSecundario{
+  background-color: #009A9D;
+}
+.colorFondo{
+  background-color: #009A9D;
+}
+
+
+.spinner svg {
+  width: 80px;
+  height: 80px;
+  stroke: #009A9D;
+  fill: #009A9D;
 }

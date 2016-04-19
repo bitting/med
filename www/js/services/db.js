@@ -46,7 +46,7 @@ var serv = angular.module("med.services", ['ngCordova'])
 
   self.all = function() {
     //return DBA.query("SELECT id, cn, name, dosis, category, pactivo, days, date_ini, date_end, alarm, suspend, units, frequency, hour_ini FROM med")
-    return DBA.query("SELECT id, name, dosis, type_units, suspend FROM med ORDER BY suspend ASC")
+    return DBA.query("SELECT id, name, dosis, type_units, suspend, date_end FROM med ORDER BY suspend ASC, date_end DESC")
     .then(function(result){
       return DBA.getAll(result);
     });
