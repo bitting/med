@@ -1,21 +1,11 @@
 
 
 <div class="list">
-   <div class="item item-input">
-    <label>
-      <span class="input-label">Instrucciones de toma</span>
-    </label>
-    <input type="text" name="instructions" ng-model="$parent.user.instructions"/>
-  </div>
 
 
-  <div class="item item-input">
-    <label>
-      <span class="input-label">Nombre</span>
-    </label>
-    <input type="text" name="name" ng-model="$parent.user.name" placeholder="Name" required />
-  </div>
-
+  <label class="item item-input">
+    <textarea placeholder="Insctucciones de toma" name="instructions" ng-model="$parent.user.instructions"></textarea>
+  </label>
 
   <div class="error-container last-error-container" ng-show="formMed.date_ini.$error && formMed.$submitted" ng-messages="formMed.date_ini.$error">
         <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica la fecha de inicio de tratamiento</div>
@@ -64,8 +54,6 @@
       <i class="icon-left ion-ios-time mediano" > </i>
   </div>
 
-
-
   <div class="error-container last-error-container" ng-show="formMed.units.$error && formMed.$submitted" ng-messages="formMed.units.$error">
         <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica las unidades</div>
   </div>
@@ -98,15 +86,14 @@
 </div>
 -->
 
-
-<div class="error-container last-error-container" ng-show="formMed.frequency.$error && formMed.$submitted" ng-messages="formMed.units.$error">
+<div class="error-container last-error-container" ng-show="formMed.frequency.$error && formMed.$submitted" ng-messages="formMed.frequency.$error">
       <div ng-message="required" class="error"><img class="cono" ng-src="img\cono.png"> Indica la periodicidad</div>
 </div>
 <div class="item item-input">
   <label>
       <span class="input-label">Periodicidad</span>
   </label>
-  <input type="text" class="ion-input-select" name="frequency" ng-model="$parent.user.frequency.label" ng-click="openPeriodicidadForm($parent.user)" ng-readonly="true" required />
+  <input type="text" class="ion-input-select" name="frequency" ng-model="$parent.user.frequency.label" ng-click="openPeriodicidadForm($parent.user)"ng-readonly="true" required/>
 </div>
 
 <div class="error-container last-error-container" ng-show="formMed.hour_ini.$invalid && formMed.$submitted" ng-messages="formMed.hour_ini.$error">

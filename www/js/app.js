@@ -33,7 +33,7 @@ angular.module('med', ['ionic','ngCordova', 'med.controllers', 'med.services', '
       //$cordovaSQLite.execute(db, "DROP TABLE tomas");
       //$cordovaSQLite.execute(db, "DROP TABLE config");
       $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS config (avatar text default 'p1')");
-      $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS med (id integer primary key, name text, days text, date_ini datetime, date_end datetime, alarm INTEGER DEFAULT 0, suspend INTEGER DEFAULT 0, units integer, frequency INTEGER, hour_ini datetime)");
+      $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS med (id integer primary key, cn text, name text, dosis text, category text, type_units text, pactivo text,instructions text, days text, date_ini datetime, date_end datetime, alarm INTEGER DEFAULT 0, suspend INTEGER DEFAULT 0, units integer, frequency INTEGER, hour_ini datetime)");
       $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS hours (id integer primary key, med_id integer, hour text)");
       $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS tomas (id integer primary key, med_id integer, med_name text, date date, tomada INTEGER DEFAULT 0)");
   });
@@ -160,6 +160,6 @@ angular.module('med', ['ionic','ngCordova', 'med.controllers', 'med.services', '
             }
         }
     });
-    
+
     $urlRouterProvider.otherwise("/home/inicio");
 })
