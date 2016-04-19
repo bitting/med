@@ -141,16 +141,13 @@ var serv = angular.module("med.services", ['ngCordova'])
     });
   }
 
-<<<<<<< HEAD
-=======
   self.allGroupDay = function() {
-      return DBA.query("SELECT count(id) as ids, sum(tomada) as tomadas, strftime('%Y-%m-%d', date) as fecha FROM tomas where date < date('now') GROUP BY strftime('%Y-%m-%d', date) ORDER BY date desc")
-      .then(function(result) {
-          return DBA.getAll(result);
-      });
+    return DBA.query("SELECT count(id) as ids, sum(tomada) as tomadas, strftime('%Y-%m-%d', date) as fecha FROM tomas where date < date('now') GROUP BY strftime('%Y-%m-%d', date) ORDER BY date desc")
+    .then(function(result) {
+        return DBA.getAll(result);
+    });
   }
 
->>>>>>> f99dccc5a7f4150154f6b7c2b491f5da9f10f5e0
   self.getByMed = function(medId) {
     var parameters = [medId];
     return DBA.query("SELECT id, med_id, dmed_name, date, tomada FROM tomas WHERE med_id = (?)", parameters)
