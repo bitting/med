@@ -203,6 +203,12 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
             if(!angular.isDefined($scope.user)) {
                 var user = {
                     name : med.Nombre,
+                    cn : med.CN,
+                    dosis : med.Dosis,
+                    category : med.Categoria,
+                    type_units: med.Unidades,
+                    pactivo : med.PrincipioActivo,
+                    instructions : "",
                     days : "",
                     date_ini : new Date(),
                     //hour_ini : hourIni,
@@ -211,7 +217,7 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
                     hours : [], //["09:08","10:08","11:08"]
                     alarm : 0,
                     suspend : 0,
-                    frequency : 1
+                    frequency : 0
                 }
                 $scope.user = user;
             }
@@ -305,87 +311,80 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
         })
     }
 
-    // Guardado con formulario
-    $scope.saveMed = function(form, user) {
-        $scope.edit = false;
-        if (form.$valid) {
-            var dateIni = new Date(user.date_ini);
-            var dateEnd = new Date(user.date_end);
+    // Guardado tomas por frecuencia
+    $scope.saveMed = function(form, user){
+      $scope.edit = false;
+      if(form.$valid) {
+          var dateIni = new Date(user.date_ini);
+          var dateEnd = new Date(user.date_end);
 
-            if (!angular.isDefined(user) || user.name =="") {
-                $scope.aviso("Nuevo medicamento", "No se ha especificado el nombre");
-            } else if (dateIni.getTime() > dateEnd.getTime()) {
-                $scope.aviso("Nuevo medicamento","La fecha de inicio no puede ser posterior a la fecha de fin");
-            } else {
-                if(!angular.isDefined(user.days)) user.days="";
-                if(!angular.isDefined(user.hours)) user.hours=[];
+          if(!angular.isDefined(user)){
+              $scope.aviso("Nuevo medicamento", "No se ha especificado el medicamento");
+          }else if (dateIni.getTime() > dateEnd.getTime()) {
+              $scope.aviso("Nuevo medicamento","La fecha de inicio no puede ser posterior a la fecha de fin");
+          }else{
+             if(!angular.isDefined(user.days)){
+                  user.days="";
+              }
+              if(!angular.isDefined(user.hours)){
+                  user.hours=[];
+              }
+              var freqHours = user.frequency.value;
+              var day = new Date(dateIni.getTime());
+              day.setHours(user.hour_ini.getHours());
+              day.setMinutes(user.hour_ini.getMinutes());
+              day.setSeconds(user.hour_ini.getSeconds());
+              var dayEnd = dateEnd;
 
-                var freqHours = user.frequency.value;
-                user.frequency = user.frequency.id;
-                user.units = user.units.id;
+              var dateIniString = $filter('date')(dateIni,"yyyy-MM-dd")+" 00:00:00";
+              var dateEndString  = $filter('date')(dateEnd.getTime(),"yyyy-MM-dd")+" 23:59:59";
+              var hourIniString  = $filter('date')(user.hour_ini,"yyyy-MM-dd HH:mm")+":00";
 
-                var day = new Date(dateIni.getTime());
-                day.setHours(user.hour_ini.getHours());
-                var dayEnd = dateEnd;
+              Users.add(user, dateIniString, dateEndString, hourIniString).then(
+                  function(res){
+                      var medId = res.insertId;
+                      if(user.alarm){
+                          console.log("Prepare notifications");
+                          $scope.prepareNotifications();
+                      }
 
-                var now = new Date();
+                      while (day.getTime() <= dayEnd.getTime()){
+                          var nameDay =  $filter('date')(day,"EEE");
+                          var dateTomaString = $filter('date')(day,"yyyy-MM-ddTHH:mm")+":00";
+                          var dateToma = new Date(dateTomaString);
+                          var dateTomaStringSave = $filter('date')(day,"yyyy-MM-dd HH:mm")+":00";
+                          console.log("dateTomaStringSave -> "+dateTomaStringSave)
+                          var now = new Date();
 
-                var dateIniString = $filter('date')(dateIni,"yyyy-MM-dd")+" 00:00:00";
-                var dateEndString  = $filter('date')(dateEnd.getTime(),"yyyy-MM-dd")+" 23:59:59";
-                var hourIniString  = $filter('date')(user.hour_ini,"yyyy-MM-dd HH:mm")+":00";
+                          Tomas.add(medId, user.name, dateToma, dateTomaStringSave, 0).then(
+                              function(res){
+                                  if (user.alarm) {
+                                      console.log("Create notification");
+                                      $scope.createNotification(res.insertId);
+                                  }
+                              },
+                              function(error){
+                                  console.log(error);
+                              }
+                          );
+                          day.setHours(day.getHours() + freqHours);
+                      }
 
-                console.log(JSON.stringify(user));
+                      $state.go("home.medicinas");
+                  },
+                  function(error){
+                      console.log(error);
+                  }
+              );
+          }
 
-                Users.add(user, dateIniString, dateIniString, hourIniString).then(
-                    function(res) {
-                        var medId = res.insertId;
-                        /*****/
-                        //si hay alarma
-                        if (user.alarm) {
-                            console.log("Prepare notifications");
-                            //$scope.prepareNotifications();  /*******/
-                        }
-
-                        while (day.getTime() <= dayEnd.getTime()) {
-                            var nameDay =  $filter('date')(day,"EEE");
-
-                            var dateTomaString = $filter('date')(day,"yyyy-MM-ddTHH:mm") + ":00";
-                            dateToma = new Date(dateTomaString);
-
-                            var dateTomaStringSave = $filter('date')(day,"yyyy-MM-dd HH:mm") + ":00";
-
-                            Tomas.add(medId, user.name, dateTomaStringSave, 0).then(
-                                function(res){
-                                    console.log("guardo toma ok ->"+medId+" "+user.name+" "+dateTomaStringSave);
-
-                                    if (user.alarm && dateToma.getTime() > now.getTime()) {
-                                        console.log("Create notification");
-                                        //$scope.createNotification(res.insertId); ////////////
-                                    }
-
-                                },
-                                function(error) {
-                                    console.log(error);
-                                }
-                            );
-
-                            day.setHours(day.getHours() + freqHours);
-                        }
-                        /*****/
-                        $ionicHistory.nextViewOptions({
-                            disableBack: true
-                        });
-                        $state.go("home.medicinas");
-                    },
-                    function(error){
-                        console.log(error);
-                    }
-                );
-            }
-            console.log("med form valid");
-        } else {
-            console.log("med form no valid");
-        }
+          console.log("med form valid");
+          $ionicHistory.nextViewOptions({
+              disableBack: true
+          });
+      }else{
+          console.log("med form no valid");
+      }
     }
 
     $scope.initEditUsers = function() {
@@ -448,78 +447,60 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
         }
     }
 
-    $scope.initMed = function() {
+    $scope.initMed = function(){
+        console.log("Id "+$stateParams.userId);
         var id = $stateParams.userId;
-        Users.get(id).then(function(user) {
-            user.date_ini = new Date(user.date_ini);
-            user.date_end = new Date(user.date_end);
-            user.hour_ini = new Date(user.hour_ini);
+
+        Users.get(id).then(function(user){
+            /*
+            Medicamentos.get(id, function(med) {  // Get By CN? o guardar todo??
+                user.name = med.Nombre;
+                user.dosis = med.Dosis;
+                user.categoria = med.Categoria;
+                user.unidades = med.PrincipioActivo;
+            });
+            */
+            user.date_ini = new Date(user.date_ini.replace(' ','T'));
+            user.date_ini.setMinutes(user.date_ini.getMinutes() + user.date_ini.getTimezoneOffset());
+            user.date_end = new Date(user.date_end.replace(' ','T'));
+            user.date_end.setMinutes(user.date_end.getMinutes() + user.date_end.getTimezoneOffset());
+            user.hour_ini = new Date(user.hour_ini.replace(' ','T'));
+            user.hour_ini.setMinutes(user.hour_ini.getMinutes() + user.hour_ini.getTimezoneOffset());
             user.units = ($filter('filter')($scope.units, {id: user.units}))[0];
             user.frequency = ($filter('filter')($scope.frequency, {id: user.frequency}))[0];
             $scope.user = user;
+            console.log("User: "+JSON.stringify(user));
         });
     }
 
-    $scope.suspendMed = function(user) {
+    $scope.suspendMed = function(user){
         $ionicPopup.confirm({
             title: "Suspender",
             template: "¿Esta seguro que quiere suspender este medicamento?",
             scope: $scope,
-            buttons: [{
+            buttons: [
+              {
                 text: "Aceptar",
                 type: "button-positive",
-                onTap: function(e) {
+                onTap: function(e){
                     Tomas.getByMedFromNow(user.id).then(
-                        function(res) {
-                            console.log(JSON.stringify(res));
-                            console.log("tomas tenht " + res.length);
+                        function(res){
                             var now = new Date()
-                            for (var i = 0; i < res.length; i++) {
+                            for(var i = 0; i < res.length; i++){
                                 console.log(JSON.stringify(res[i]));
                                 var date = new Date(res[i].date);
-                                if (date.getTime() > now.getTime()) {
+                                if(date.getTime() > now.getTime()){
                                     $scope.deleteToma(res[i].id);
                                 }
                             }
                         },
-                        function(error) {
-                            console.log(error);
+                        function(error){
+                          console.log(error);
                         }
                     );
 
                     user.suspend = 1;
-                    Users.update(user).then(
-                        function(res) {
-                            $state.go('users');
-                        },
-                        function(error){
-                            console.log(error);
-                        }
-                    )
-                }
-            },
-            {
-                text: "Cancelar"
-            }]
-        })
-    }
-
-    $scope.deleteMed = function(user) {
-        $ionicPopup.confirm({
-            title: "Eliminar",
-            template: "¿Esta seguro que quiere eliminar este medicamento? Se eliminarán todas las tomas registradas",
-            scope: $scope,
-            buttons: [{
-                text: "Aceptar",
-                type: "button-positive",
-                onTap: function(e) {
-                    Tomas.removeByMed(user.id).then(
-                        function(res){},
-                        function(error){
-                            console.log(error);
-                        }
-                    );
-                    Users.remove(user.id).then(
+                    Users.updateSuspend(user).then(
                         function(res){
                             $state.go('home.medicinas');
                         },
@@ -528,10 +509,59 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
                         }
                     )
                 }
-            },
-            {
+              },
+              {
                 text: "Cancelar"
-            }]
+              }
+          ]
+      })
+    }
+
+    $scope.deleteMed = function(user){
+
+        $ionicPopup.confirm({
+            title: "Eliminar",
+            template: "¿Esta seguro que quiere eliminar este medicamento? Se eliminarán todas las tomas registradas",
+            scope: $scope,
+            buttons: [
+              {
+                text: "Aceptar",
+                type: "button-positive",
+                onTap: function(e){
+                    Tomas.removeByMed(user.id).then(
+                        function(res){
+                        },
+                        function(error){
+                            console.log(error);
+                        }
+                    );
+                    Users.remove(user.id).then(
+                        function(res){
+                          $state.go('home.medicinas');
+                        },
+                        function(error){
+                            console.log(error);
+                        }
+                    )
+                }
+              },
+              {
+                text: "Cancelar"
+              }
+            ]
+        })
+    }
+
+    $scope.deleteToma = function(tomaId){
+        if (window.cordova) {
+            if (cordova.plugins.notification.local) {
+                cordova.plugins.notification.local.cancel(tomaId, function () {
+                }, $scope);
+            }
+        }
+
+        Tomas.remove(tomaId).then(function(toma){
+            console.log("Toma eliminada");
         })
     }
 
@@ -570,32 +600,41 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
         })
     }
 
-    $scope.prepareNotifications = function() {
-        cordova.plugins.notification.local.registerPermission(function (granted) {});
-        cordova.plugins.notification.local.on("click", function (notification) {
-            var data = JSON.parse(notification.data);
-            var id = data['tomaId'];
-            $state.go('toma',{tomaId: id});
-        });
+    $scope.prepareNotifications = function(){
+      if (window.cordova) {
+        if (cordova.plugins.notification.local) {
+          cordova.plugins.notification.local.registerPermission(function (granted) {});
+          cordova.plugins.notification.local.on("click", function (notification) {
+              var data = JSON.parse(notification.data);
+              var id = data['tomaId'];
+              $state.go('toma',{tomaId: id});
+          });
+        }
+      }
     }
 
-    $scope.createNotification = function(tomaId) {
-        Tomas.get(tomaId).then(function(toma) {
-            var date = new Date(toma.date);
-            var hour = $filter('date')(date,"HH:mm");
-
+    $scope.createNotification = function(tomaId){
+        if (window.cordova) {
             if (cordova.plugins.notification.local) {
-                cordova.plugins.notification.local.schedule({
-                    id: tomaId,
-                    title: "Aviso de toma",
-                    text: toma.med_name+" "+hour,
-                    at: date,
-                    data: {tomaId: tomaId},
-                    //autoClear:  true
-                });
+                Tomas.get(tomaId).then(function(toma){
+                  var date = new Date(toma.date.replace(' ','T'));
+                  var now = new Date();
+                  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+                  if(date.getTime() > now.getTime()){
+                      var hour = $filter('date')(date,"HH:mm");
+                      cordova.plugins.notification.local.schedule({
+                          id: tomaId,
+                          title: "Aviso de toma",
+                          text: toma.med_name+" "+hour,
+                          at: date,
+                          data: {tomaId: tomaId},
+                      });
+                  }
+                })
             }
-        })
+        }
     }
+
 })
 
 /* Filtros */
@@ -683,4 +722,32 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
         if(mes==12) res = 'Diciembre';
         return res+" "+ano;
     };
+})
+
+.filter('capitalize', function() {
+  return function(input){
+      if(angular.isDefined(input)){
+          if(input.indexOf(' ') !== -1){
+            var inputPieces,
+                i;
+
+            input = input.toLowerCase();
+            inputPieces = input.split(' ');
+
+            for(i = 0; i < inputPieces.length; i++){
+              inputPieces[i] = capitalizeString(inputPieces[i]);
+            }
+
+            return inputPieces.toString().replace(/,/g, ' ');
+          }
+          else {
+            input = input.toLowerCase();
+            return capitalizeString(input);
+          }
+
+          function capitalizeString(inputString){
+            return inputString.substring(0,1).toUpperCase() + inputString.substring(1);
+          }
+        };
+    }
 });

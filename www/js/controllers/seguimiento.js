@@ -13,6 +13,12 @@ app.controller('seguimientoCtrl', function($scope) {
             previousDate,
             currentDate;
 
+        var day = {
+            tomas = [],
+            status = true,
+            date = null
+        }
+
         if (tomas.length > 1) {
             for (var i = 1; i < tomas.length; i++) {
                 item = tomas[i];
@@ -20,6 +26,14 @@ app.controller('seguimientoCtrl', function($scope) {
 
                 currentDate = new Date(item.date.replace(' ', 'T'));
                 currentDate.setMinutes(currentDate.getMinutes() + currentDate.getTimezoneOffset());
+                previousDate = new Date(item.date.replace(' ', 'T'));
+                previousDate.setMinutes(previousDate.getMinutes() + previousDate.getTimezoneOffset());
+
+                if (i == 1) {
+                    day.tomas.push(item);
+                    day.status = item;
+                    day.date = item;
+                }
             }
         }
     }

@@ -10,19 +10,6 @@ app.controller("tomasCtrl", function($scope, Tomas, $state, $stateParams, $filte
         })
     }
 
-    $scope.deleteToma = function(tomaId){
-        if (window.cordova) {
-            if (cordova.plugins.notification.local) {
-                cordova.plugins.notification.local.cancel(tomaId, function () {
-                }, $scope);
-            }
-        }
-
-        Tomas.remove(tomaId).then(function(toma){
-            $state.go("home.tomas");
-        })
-    }
-
     $scope.initTomaok = function() {
         var mensajes = [
             'Mensaje 1',
