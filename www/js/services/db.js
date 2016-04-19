@@ -142,10 +142,10 @@ var serv = angular.module("med.services", ['ngCordova'])
   }
 
   self.allGroupDay = function() {
-      return DBA.query("SELECT count(id), sum(tomada), strftime('%Y-%m-%d', date) FROM tomas GROUP BY strftime('%Y-%m-%d', date) ORDER BY date desc");
-      .then(function(result)) {
+      return DBA.query("SELECT count(id), sum(tomada), strftime('%Y-%m-%d', date) FROM tomas GROUP BY strftime('%Y-%m-%d', date) ORDER BY date desc")
+      .then(function(result) {
           return DBA.getAll(result);
-      }
+      });
   }
 
   self.getByMed = function(medId) {
