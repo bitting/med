@@ -1,5 +1,16 @@
 <ion-view view-title="Seguimiento" ng-init="initSeguimiento()">
-  <ion-content>
-    Seguimiento
-  </ion-content>
+    <ion-content>
+        <div class="card">
+            <ion-list>
+                <div ng-repeat="toma in tomasDays | groupByMonthYear" divider-collection-repeat>
+                    <div class="item item-divider" ng-show="toma.sep" > {{toma.sep}} </div>
+                    <ion-item ng-hide="item.isDivider" class="item">
+                        <h2>{{ toma.fecha }}</h2>
+                        <i class="icon ion-record assertive" ng-show="toma.tomadas < toma.ids"> </i>
+						<i class="icon ion-checkmark-circled balanced" ng-show="toma.tomadas == toma.ids"> </i>
+                    </ion-item>
+                </div>
+            </ion-list>
+        </div>
+    </ion-content>
 </ion-view>
