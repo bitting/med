@@ -6,7 +6,7 @@
               Nueva medicina
             </button>
             <ion-list>
-                <ion-item class="item-remove-animate item-icon-right" ng-repeat="user in users" ui-sref="home.medicamento({ userId: user.id })">
+                <ion-item class="item-remove-animate item-icon-right"  ng-class="{ 'suspend': {{user.suspend}} } ng-repeat="user in users" ui-sref="home.medicamento({ userId: user.id })">
                     <h2>{{user.name}}</h2>
                     <span>{{user.type_units | capitalize}} - {{user.dosis}} <br /></span>
                     <h3 ng-show="{{user.suspend}}">Suspendido </h3>
