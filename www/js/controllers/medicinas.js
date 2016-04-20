@@ -342,7 +342,6 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
               var hourIniString  = $filter('date')(user.hour_ini,"yyyy-MM-dd HH:mm")+":00";
 
               $ionicLoading.show({
-                //templateUrl : '<i class="icon ion-loading-c"> Cargando </i>',
                 templateUrl : '/templates/loading.html',
                 animation: 'fade-in',
                 noBackdrop : false,
@@ -497,6 +496,15 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
                 text: "Aceptar",
                 type: "button-positive",
                 onTap: function(e){
+
+                    $ionicLoading.show({
+                      templateUrl : '/templates/loading.html',
+                      animation: 'fade-in',
+                      noBackdrop : false,
+                      maxWidth: 80,
+                      showDelay: 0
+                    });
+
                     Tomas.getByMedFromNow(user.id).then(
                         function(res){
                             var now = new Date()

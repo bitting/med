@@ -130,7 +130,6 @@ var serv = angular.module("med.services", ['ngCordova'])
   return self;
 })
 
-
 .factory('Tomas', function($cordovaSQLite, DBA) {
   var self = this;
 

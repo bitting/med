@@ -1,8 +1,12 @@
-<ion-view view-title="Medicinas" ng-init="initUsers()">
+<ion-view view-title="Mis medicinas" ng-init="initUsers()">
     <ion-content>
         <div>{{ prueba }}</div>
         <div class="card">
-
+            <div ng-hide="users.length > 0">
+              <h3>
+                Aún no has añadido ninguna medicación
+              </h3>
+            </div>
             <ion-list>
                 <ion-item class="item-icon-right" ng-repeat="user in users" ui-sref="home.medicamento({ userId: user.id })">
                   <div class="{{user | estadoMedicamento}}">
@@ -15,9 +19,9 @@
            </ion-list>
         </div>
     </ion-content>
-    <ion-footer-bar class="bar-positive">
-        <button class="button button-block" ui-sref="home.categorias">
-         Nueva medicina
+    <ion-footer-bar class="footer-buttons">
+        <button class="button button-full button-positive footer-buttons" ui-sref="home.categorias">
+         Añadir medicación
         </button>
 
     </ion-footer-bar>
