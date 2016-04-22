@@ -13,6 +13,8 @@
                     <h2>{{user.name}}</h2>
                     <span>{{user.type_units | capitalize}} - {{user.dosis}} <br /></span>
                     <h3 ng-show="{{user.suspend}}">Suspendido</h3>
+                    <h3 ng-show="{{ (user | estadoMedicamento) == 'finalizado'}}">Finalizado</h3>
+
                     <i class="icon ion-chevron-right icon accesory"></i>
                   </div>
                 </ion-item>
