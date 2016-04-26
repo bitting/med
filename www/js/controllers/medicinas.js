@@ -1,4 +1,4 @@
-app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Categorias, Medicamentos, $state, $stateParams, $window, $ionicPopup, $ionicModal, $http, $filter, $ionicHistory) {
+app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Categorias, Medicamentos, $state, $stateParams, $window, $ionicPopup, $ionicModal, $http, $filter, $ionicHistory, $ionicLoading) {
 
     /* MODAL DíaAS*/
     $ionicModal.fromTemplateUrl('templates/days.html',{
@@ -168,6 +168,7 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
         Users.all().then(function(users){
             $scope.users = users;
             console.log(users);
+            $ionicLoading.hide();
         });
     }
 
@@ -220,8 +221,15 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
                     frequency : 0
                 }
                 $scope.user = user;
+
+                var cats = ["5-asa","Biológicos","Inmunosupresores"];
+                $scope.showclave = cats.indexOf(med.Categoria) == -1);
+
             }
         });
+
+
+
     }
 
     $scope.frequency = [{
@@ -315,73 +323,114 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
     $scope.saveMed = function(form, user){
       $scope.edit = false;
       if(form.$valid) {
-          var dateIni = new Date(user.date_ini);
-          var dateEnd = new Date(user.date_end);
 
-          if(!angular.isDefined(user)){
-              $scope.aviso("Nuevo medicamento", "No se ha especificado el medicamento");
-          }else if (dateIni.getTime() > dateEnd.getTime()) {
-              $scope.aviso("Nuevo medicamento","La fecha de inicio no puede ser posterior a la fecha de fin");
-          }else{
-             if(!angular.isDefined(user.days)){
-                  user.days="";
-              }
-              if(!angular.isDefined(user.hours)){
-                  user.hours=[];
-              }
-              var freqHours = user.frequency.value;
-              var day = new Date(dateIni.getTime());
-              day.setHours(user.hour_ini.getHours());
-              day.setMinutes(user.hour_ini.getMinutes());
-              day.setSeconds(user.hour_ini.getSeconds());
-              var dayEnd = dateEnd;
+        var dateIni = new Date(user.date_ini);
+        var dateEnd = new Date(user.date_end);
 
-              var dateIniString = $filter('date')(dateIni,"yyyy-MM-dd")+" 00:00:00";
-              var dateEndString  = $filter('date')(dateEnd.getTime(),"yyyy-MM-dd")+" 23:59:59";
-              var hourIniString  = $filter('date')(user.hour_ini,"yyyy-MM-dd HH:mm")+":00";
+        // Para calcular que el tratamiento no sea de más de 4 meses
+        var date4meses = new Date();
+        date4meses.setDate(dateIni.getDate() + 122);
 
-              Users.add(user, dateIniString, dateEndString, hourIniString).then(
-                  function(res){
-                      var medId = res.insertId;
-                      if(user.alarm){
-                          console.log("Prepare notifications");
-                          $scope.prepareNotifications();
-                      }
+        if(!angular.isDefined(user)){
+            $scope.aviso("Nuevo medicamento", "No se ha especificado el medicamento");
+        }else if (dateIni.getTime() > dateEnd.getTime()) {
+            $scope.aviso("Nuevo medicamento","La fecha de inicio no puede ser posterior a la fecha de fin");
+        }else if (dateEnd.getTime() > date4meses.getTime()) {
+              $scope.aviso("Nuevo medicamento","La duración no puede superar los 4 meses, puedes volver a añadir esta medicación nuevamente cuando finalice.");
+        }else{
 
-                      while (day.getTime() <= dayEnd.getTime()){
-                          var nameDay =  $filter('date')(day,"EEE");
-                          var dateTomaString = $filter('date')(day,"yyyy-MM-ddTHH:mm")+":00";
-                          var dateToma = new Date(dateTomaString);
-                          var dateTomaStringSave = $filter('date')(day,"yyyy-MM-dd HH:mm")+":00";
-                          console.log("dateTomaStringSave -> "+dateTomaStringSave)
-                          var now = new Date();
+            var htm = "<h3>{{user.name}}</h3>";
+            htm += "<spam>{{medicamento.Unidades }} {{medicamento.Dosis }} <br /> </spam>";
+            htm += "<spam> Unidades: {{user.units.label}} </spam>";
+            htm += "<br /><spam> Periodicidad: {{user.frequency.label}} </spam>";
+            htm += "<br /><br /><spam>Fíjate en las unidades y periodicidad que has definido y confirma que son las que tu médico te recomendó</spam>";
 
-                          Tomas.add(medId, user.name, dateToma, dateTomaStringSave, 0).then(
-                              function(res){
-                                  if (user.alarm) {
-                                      console.log("Create notification");
-                                      $scope.createNotification(res.insertId);
-                                  }
-                              },
-                              function(error){
-                                  console.log(error);
-                              }
-                          );
-                          day.setHours(day.getHours() + freqHours);
-                      }
+            $ionicPopup.confirm({
+                title: "Confirmación",
+                template: htm, //"¿Esta seguro que quiere eliminar este medicamento?",
+                scope: $scope,
+                buttons: [{
+                    text: "Confirmar",
+                    type: "button-positive",
+                    onTap: function(e) {
+                               if(!angular.isDefined(user.days)){
+                                    user.days="";
+                                }
+                                if(!angular.isDefined(user.hours)){
+                                    user.hours=[];
+                                }
+                                var freqHours = user.frequency.value;
+                                var day = new Date(dateIni.getTime());
+                                day.setHours(user.hour_ini.getHours());
+                                day.setMinutes(user.hour_ini.getMinutes());
+                                day.setSeconds(user.hour_ini.getSeconds());
+                                var dayEnd = dateEnd;
 
-                      $state.go("home.medicinas");
-                  },
-                  function(error){
-                      console.log(error);
-                  }
-              );
-          }
+                                var dateIniString = $filter('date')(dateIni,"yyyy-MM-dd")+" 00:00:00";
+                                var dateEndString  = $filter('date')(dateEnd.getTime(),"yyyy-MM-dd")+" 23:59:59";
+                                var hourIniString  = $filter('date')(user.hour_ini,"yyyy-MM-dd HH:mm")+":00";
 
-          console.log("med form valid");
-          $ionicHistory.nextViewOptions({
-              disableBack: true
-          });
+                                $ionicLoading.show({
+                                  templateUrl : '/templates/loading.html',
+                                  animation: 'fade-in',
+                                  noBackdrop : false,
+                                  maxWidth: 80,
+                                  showDelay: 0
+                                });
+
+                                Users.add(user, dateIniString, dateEndString, hourIniString).then(
+                                    function(res){
+
+                                        var medId = res.insertId;
+                                        if(user.alarm){
+                                            console.log("Prepare notifications");
+                                            $scope.prepareNotifications();
+                                        }
+
+                                        while (day.getTime() <= dayEnd.getTime()){
+                                            var nameDay =  $filter('date')(day,"EEE");
+                                            var dateTomaString = $filter('date')(day,"yyyy-MM-ddTHH:mm")+":00";
+                                            var dateToma = new Date(dateTomaString);
+                                            var dateTomaStringSave = $filter('date')(day,"yyyy-MM-dd HH:mm")+":00";
+                                            console.log("dateTomaStringSave -> "+dateTomaStringSave)
+                                            var now = new Date();
+
+                                            Tomas.add(medId, user.name, dateToma, dateTomaStringSave, 0).then(
+                                                function(res){
+                                                    if (user.alarm) {
+                                                        console.log("Create notification");
+                                                        $scope.createNotification(res.insertId);
+                                                    }
+                                                },
+                                                function(error){
+                                                    console.log(error);
+                                                }
+                                            );
+                                            day.setHours(day.getHours() + freqHours);
+                                        }
+
+                                        $state.go("home.medicinas");
+
+                                    },
+                                    function(error){
+                                        console.log(error);
+                                    }
+                                );
+                            console.log("med form valid");
+                            $ionicHistory.nextViewOptions({
+                                disableBack: true
+                            });
+
+                          }
+                      },
+                      {
+                          text: "Cancelar"
+                      }]
+                  })
+
+        }
+
+
       }else{
           console.log("med form no valid");
       }
@@ -403,6 +452,127 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
             console.log(JSON.stringify(units));
         });
     }
+
+
+    // Editar
+    $scope.editMed = function(form, user){
+      $scope.edit = true;
+      if(form.$valid) {
+
+        var dateIni = new Date(user.date_ini);
+        var dateEnd = new Date(user.date_end);
+
+        // Para calcular que el tratamiento no sea de más de 4 meses
+        var date4meses = new Date();
+        date4meses.setDate(dateIni.getDate() + 122);
+
+        if(!angular.isDefined(user)){
+            $scope.aviso("Nuevo medicamento", "No se ha especificado el medicamento");
+        }else if (dateIni.getTime() > dateEnd.getTime()) {
+            $scope.aviso("Nuevo medicamento","La fecha de inicio no puede ser posterior a la fecha de fin");
+        }else if (dateEnd.getTime() > date4meses.getTime()) {
+              $scope.aviso("Nuevo medicamento","La duración no puede superar los 4 meses, puedes volver a añadir esta medicación nuevamente cuando finalice.");
+        }else{
+
+            var htm = "<h3>{{user.name}}</h3>";
+            htm += "<spam>{{medicamento.Unidades }} {{medicamento.Dosis }} <br /> </spam>";
+            htm += "<spam> Unidades: {{user.units.label}} </spam>";
+            htm += "<br /><spam> Periodicidad: {{user.frequency.label}} </spam>";
+            htm += "<br /><br /><spam>Fíjate en las unidades y periodicidad que has definido y confirma que son las que tu médico te recomendó</spam>";
+
+            $ionicPopup.confirm({
+                title: "Confirmación",
+                template: htm, //"¿Esta seguro que quiere eliminar este medicamento?",
+                scope: $scope,
+                buttons: [{
+                    text: "Confirmar",
+                    type: "button-positive",
+                    onTap: function(e) {
+                               if(!angular.isDefined(user.days)){
+                                    user.days="";
+                                }
+                                if(!angular.isDefined(user.hours)){
+                                    user.hours=[];
+                                }
+                                var freqHours = user.frequency.value;
+                                var day = new Date(dateIni.getTime());
+                                day.setHours(user.hour_ini.getHours());
+                                day.setMinutes(user.hour_ini.getMinutes());
+                                day.setSeconds(user.hour_ini.getSeconds());
+                                var dayEnd = dateEnd;
+
+                                var dateIniString = $filter('date')(dateIni,"yyyy-MM-dd")+" 00:00:00";
+                                var dateEndString  = $filter('date')(dateEnd.getTime(),"yyyy-MM-dd")+" 23:59:59";
+                                var hourIniString  = $filter('date')(user.hour_ini,"yyyy-MM-dd HH:mm")+":00";
+
+                                $ionicLoading.show({
+                                  templateUrl : '/templates/loading.html',
+                                  animation: 'fade-in',
+                                  noBackdrop : false,
+                                  maxWidth: 80,
+                                  showDelay: 0
+                                });
+
+                                Users.add(user, dateIniString, dateEndString, hourIniString).then(
+                                    function(res){
+
+                                        var medId = res.insertId;
+                                        if(user.alarm){
+                                            console.log("Prepare notifications");
+                                            $scope.prepareNotifications();
+                                        }
+
+                                        while (day.getTime() <= dayEnd.getTime()){
+                                            var nameDay =  $filter('date')(day,"EEE");
+                                            var dateTomaString = $filter('date')(day,"yyyy-MM-ddTHH:mm")+":00";
+                                            var dateToma = new Date(dateTomaString);
+                                            var dateTomaStringSave = $filter('date')(day,"yyyy-MM-dd HH:mm")+":00";
+                                            console.log("dateTomaStringSave -> "+dateTomaStringSave)
+                                            var now = new Date();
+
+                                            Tomas.add(medId, user.name, dateToma, dateTomaStringSave, 0).then(
+                                                function(res){
+                                                    if (user.alarm) {
+                                                        console.log("Create notification");
+                                                        $scope.createNotification(res.insertId);
+                                                    }
+                                                },
+                                                function(error){
+                                                    console.log(error);
+                                                }
+                                            );
+                                            day.setHours(day.getHours() + freqHours);
+                                        }
+
+                                        $state.go("home.medicinas");
+
+                                    },
+                                    function(error){
+                                        console.log(error);
+                                    }
+                                );
+                            console.log("med form valid");
+                            $ionicHistory.nextViewOptions({
+                                disableBack: true
+                            });
+
+                          }
+                      },
+                      {
+                          text: "Cancelar"
+                      }]
+                  })
+
+        }
+
+
+      }else{
+          console.log("med form no valid");
+      }
+    }
+
+
+
 
     $scope.update = function(user) {
         var id = $stateParams.userId;
@@ -483,6 +653,15 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
                 text: "Aceptar",
                 type: "button-positive",
                 onTap: function(e){
+
+                    $ionicLoading.show({
+                      templateUrl : '/templates/loading.html',
+                      animation: 'fade-in',
+                      noBackdrop : false,
+                      maxWidth: 80,
+                      showDelay: 0
+                    });
+
                     Tomas.getByMedFromNow(user.id).then(
                         function(res){
                             var now = new Date()
@@ -749,5 +928,27 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
             return inputString.substring(0,1).toUpperCase() + inputString.substring(1);
           }
         };
+    }
+})
+
+.filter('finalizado', function($filter) {
+    return function(input) {
+        var date = new Date(input.replace(' ','T'));
+        var today = new Date();
+        return today > date;
+    };
+})
+
+.filter('estadoMedicamento', function() {
+    return function(user) {
+        var dateEnd = new Date(user.date_end.replace(' ','T'));
+        var today = new Date();
+        var estado = 'activo';
+        if (user.suspend) {
+            estado = 'suspendido';
+        }else if(today > dateEnd){
+            estado = 'finalizado';
+        }
+        return estado;
     }
 });

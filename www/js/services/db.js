@@ -46,7 +46,7 @@ var serv = angular.module("med.services", ['ngCordova'])
 
   self.all = function() {
     //return DBA.query("SELECT id, cn, name, dosis, category, pactivo, days, date_ini, date_end, alarm, suspend, units, frequency, hour_ini FROM med")
-    return DBA.query("SELECT id, name, dosis, type_units, suspend FROM med")
+    return DBA.query("SELECT id, name, dosis, type_units, suspend, date_end FROM med ORDER BY suspend ASC, date_end DESC")
     .then(function(result){
       return DBA.getAll(result);
     });
@@ -130,7 +130,6 @@ var serv = angular.module("med.services", ['ngCordova'])
   return self;
 })
 
-
 .factory('Tomas', function($cordovaSQLite, DBA) {
   var self = this;
 
@@ -142,10 +141,17 @@ var serv = angular.module("med.services", ['ngCordova'])
   }
 
   self.allGroupDay = function() {
+<<<<<<< HEAD
       return DBA.query("SELECT count(id) as ids, sum(tomada) as tomadas, strftime('%Y-%m-%d', date) as fecha FROM tomas WHERE date < date('now') GROUP BY strftime('%Y-%m-%d', date) ORDER BY date desc")
       .then(function(result) {
           return DBA.getAll(result);
       });
+=======
+    return DBA.query("SELECT count(id) as ids, sum(tomada) as tomadas, strftime('%Y-%m-%d', date) as fecha FROM tomas where date < date('now') GROUP BY strftime('%Y-%m-%d', date) ORDER BY date desc")
+    .then(function(result) {
+        return DBA.getAll(result);
+    });
+>>>>>>> aeeae94e118b05a9ae6e199e96639b359cd4f5e6
   }
 
   self.getByMed = function(medId) {
