@@ -142,7 +142,7 @@ var serv = angular.module("med.services", ['ngCordova'])
   }
 
   self.allGroupDay = function() {
-      return DBA.query("SELECT count(id) as ids, sum(tomada) as tomadas, strftime('%Y-%m-%d', date) as fecha FROM tomas where date < date('now') GROUP BY strftime('%Y-%m-%d', date) ORDER BY date desc")
+      return DBA.query("SELECT count(id) as ids, sum(tomada) as tomadas, strftime('%Y-%m-%d', date) as fecha FROM tomas WHERE date < date('now') GROUP BY strftime('%Y-%m-%d', date) ORDER BY date desc")
       .then(function(result) {
           return DBA.getAll(result);
       });
@@ -164,13 +164,42 @@ var serv = angular.module("med.services", ['ngCordova'])
     });
   }
 
+  self.getById = function(tomaId) {
+    var parameters = [tomaId];
+    return DBA.query("SELECT id, med_id, med_name, date, tomada FROM tomas WHERE id = (?)", parameters)
+    .then(function(result) {
+        return DBA.getById(result);
+    });
+  }
+
+  self.add = function(med_id, med_name, date, tomada) {
+    var parameters = [med_id, med_name, date, tomada];
+    console.log("db guarda toma dia "+date);
+    return DBA.query("INSERT INTO tomas (med_id, med_name, date, tomada) VALUES (?,?,?,?)", parameters);
+  }
+
+  self.remove = function(tomaId) {
+    var parameters = [tomaId];
+    return DBA.query("DELETE FROM tomas WHERE id = (?)", parameters);
+  }
+
+  self.update = function(editToma) {
+    var parameters = [editToma.med_id, editToma.med_name, editToma.date, editToma.tomada, editToma.id];
+    return DBA.query("UPDATE tomas SET med_id = (?), med_name = (?), date = (?), tomada = (?) WHERE id = (?)", parameters);
+  }
+
+  self.setTomada = function(tomaId, tomada) {
+    var parameters = [tomada, tomaId];
+    return DBA.query("UPDATE tomas SET tomada = (?) WHERE id = (?)", parameters);
+  }
+
 /*
   Fecha hoy con 00:00:00
   Buscar fecha entre fecha de hoy y fecha +1*/
   self.getByDay = function(dateIni, dateEnd) {
     var parameters = [dateIni, dateEnd];
     console.log(parameters);
-    return DBA.query("SELECT id, med_id, med_name, date FROM tomas WHERE date >= (?) and date <= (?)", parameters)
+    return DBA.query("SELECT id, med_id, med_name, date, tomada FROM tomas WHERE date >= (?) and date <= (?)", parameters)
     .then(function(result) {
       return DBA.getAll(result);
     });

@@ -107,6 +107,16 @@ angular.module('med', ['ionic','ngCordova', 'med.controllers', 'med.services', '
         }
       }
     })
+    .state("home.toma", {
+        url: "/toma/:tomaId",
+        cache: false,
+        views: {
+            'menuContent': {
+                templateUrl: "templates/toma.html",
+                controller: 'tomasCtrl'
+            }
+        }
+    })
     .state("home.tomaok", {
         url: "/tomaok",
         cache: false,
@@ -119,9 +129,19 @@ angular.module('med', ['ionic','ngCordova', 'med.controllers', 'med.services', '
     })
     .state("home.seguimiento", {
         url: "/seguimiento",
+        cache: false,
         views: {
             'menuContent': {
                 templateUrl: 'templates/seguimiento.html',
+                controller: 'seguimientoCtrl'
+            }
+        }
+    })
+    .state("home.seguimientodia", {
+        url: "/seguimiento/:dia",
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/seguimientodia.html',
                 controller: 'seguimientoCtrl'
             }
         }

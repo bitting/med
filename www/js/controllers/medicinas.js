@@ -616,20 +616,20 @@ app.controller("medicinasCtrl", function($scope, Users, Hours, Tomas, Notify, Ca
     $scope.createNotification = function(tomaId){
         if (window.cordova) {
             if (cordova.plugins.notification.local) {
-                Tomas.get(tomaId).then(function(toma){
-                  var date = new Date(toma.date.replace(' ','T'));
-                  var now = new Date();
-                  date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-                  if(date.getTime() > now.getTime()){
-                      var hour = $filter('date')(date,"HH:mm");
-                      cordova.plugins.notification.local.schedule({
-                          id: tomaId,
-                          title: "Aviso de toma",
-                          text: toma.med_name+" "+hour,
-                          at: date,
-                          data: {tomaId: tomaId},
-                      });
-                  }
+                Tomas.get(tomaId).then(function(toma) {
+                    var date = new Date(toma.date.replace(' ','T'));
+                    var now = new Date();
+                    date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
+                    if(date.getTime() > now.getTime()){
+                        var hour = $filter('date')(date,"HH:mm");
+                        cordova.plugins.notification.local.schedule({
+                            id: tomaId,
+                            title: "Aviso de toma",
+                            text: toma.med_name+" "+hour,
+                            at: date,
+                            data: {tomaId: tomaId},
+                        });
+                    }
                 })
             }
         }

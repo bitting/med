@@ -35,4 +35,24 @@ app.controller("tomasCtrl", function($scope, Tomas, $state, $stateParams, $filte
         });
         $state.go('home.inicio');
     }
+
+    $scope.initToma = function() {
+        $scope.tomaId = $stateParams.tomaId;
+        console.log($scope.tomaId);
+        Tomas.getById($scope.tomaId).then(function (toma) {
+            $scope.toma = toma;
+            console.log(toma);
+        });
+    }
+
+    $scope.tomada = function(tomaId) {
+        Tomas.getById(tomaId).then(function(toma) {
+            console.log(toma);
+            Tomas.setTomada(toma.id, 1-toma.tomada);
+            $ionicHistory.nextViewOptions({
+                disableBack: true
+            });
+            $state.go('home.tomaok');
+        })
+    }
 });

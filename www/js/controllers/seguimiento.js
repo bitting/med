@@ -1,8 +1,20 @@
-app.controller('seguimientoCtrl', function($scope, Tomas) {
+app.controller('seguimientoCtrl', function($scope, Tomas, $filter, $stateParams) {
     $scope.initSeguimiento = function() {
         Tomas.allGroupDay().then(function (tomasDays) {
             $scope.tomasDays = tomasDays;
         });
+    }
+
+    $scope.initSeguimientoDia = function() {
+        var day = $stateParams.dia;
+        $scope.day = day;
+        var todayStringIni = $filter('date')(day, "yyyy-MM-dd") + " 00:00:00";
+        var todayStringEnd = $filter('date')(day, "yyyy-MM-dd") + " 23:59:59";
+
+        Tomas.getByDay(todayStringIni, todayStringEnd).then(function(tomas) {
+            $scope.tomas = tomas;
+            console.log(tomas);
+        })
     }
 })
 .filter('groupByMonthYear', function($parse, $filter) {

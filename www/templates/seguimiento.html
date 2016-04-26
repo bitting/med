@@ -2,7 +2,7 @@
     <ion-content>
         <div class="card">
             <ion-list>
-                <div ng-repeat="toma in tomasDays | groupByMonthYear" divider-collection-repeat>
+                <div ng-repeat="toma in tomasDays | groupByMonthYear" divider-collection-repeat ui-sref="home.seguimientodia({ dia: toma.fecha })">
                     <div class="item item-divider" ng-show="toma.sep" > {{toma.sep}} </div>
                     <ion-item ng-hide="item.isDivider" class="item">
                         <h2>{{ toma.fecha }}</h2>

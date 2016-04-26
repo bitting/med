@@ -1,35 +1,16 @@
 <ion-view title="Pastillero" ng-init="initTomas()">
     <ion-content>
     <div class="card">
-
-   <!--
-       <ion-list>
-         <ion-item class="item-remove-animate item-icon-right" ng-repeat="toma in tomas" >
-                <h2>{{toma.id}}</h2>
-								<h2>{{toma.med_name }}</h2>
-								<h2>{{toma.date | toDiaNum}}</h2>
-								<h2>{{toma.date | toHour}}</h2>
-
-						    <div> Dia {{toma}} </div>
-            <i class="icon ion-chevron-right icon accesory"></i>
-
-         </ion-item>
-       </ion-list>
-   -->
-
 			 <ion-list>
-				<div ng-repeat="toma in tomas | groupByMonthYear" divider-collection-repeat>
+				<div ng-repeat="toma in tomas" divider-collection-repeat>
 
 
-				  <div class="item item-divider" ng-show="toma.sep" > {{toma.sep}} </div>
+				  <div class="item item-divider" ng-show="toma.sep">{{toma.sep}}</div>
 
-			    <ion-item ng-hide="item.isDivider" class="item">
+			    <ion-item ng-hide="item.isDivider" class="item" ui-sref="home.toma({ tomaId: toma.id })">
 
 						<h2>{{toma.med_name}}</h2>
-						<h2>{{toma.date | toDiaNum}}</h2>
-						<h2>{{toma.date | toHour}}</h2>
-						<h2>{{toma.tomada}}</h2>
-
+						<h3>{{toma.date | toDiaNum}} - {{toma.date | toHour}}</h3>
             <i class="icon ion-record assertive" ng-show="toma.tomada == 0"> </i>
 						<i class="icon ion-checkmark-circled balanced" ng-show="toma.tomada == 1"> </i>
 			    </ion-item>
